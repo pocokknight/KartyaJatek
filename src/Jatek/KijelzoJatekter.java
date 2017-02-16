@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import static Jatek.Main.*;
 import java.util.Vector;
+import static Jatek.Main.*;
 
 public class KijelzoJatekter extends Kijelzo {
 
@@ -35,14 +36,12 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(ellenfel2);
         p.add(ellenfel3);
         
-        for (int i = 0; i < 10; i++) {
-            kartyak.add(new KartyaPanel(new KartyaLap(0, 9), 0, 2));
-        }
-        
         kartyakFrissit();
     }
 
-    private void tobbjatekos() {}
+    private void tobbjatekos() {
+        System.out.println("Még nem támogatott.");
+    }
     
     
     public void addKartya(KartyaLap k){
