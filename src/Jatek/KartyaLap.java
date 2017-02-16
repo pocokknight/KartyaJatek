@@ -32,7 +32,7 @@ public class KartyaLap{
         return s;
     }
     
-    KartyaLap(int e,int f){
+    KartyaLap(int f,int e){
         ertek = e;
         fajta = f;
         kijelolt = false;

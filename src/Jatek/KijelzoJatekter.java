@@ -35,10 +35,10 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(ellenfel2);
         p.add(ellenfel3);
         
-        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
-        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
-        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
-        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
+        for (int i = 0; i < 10; i++) {
+            kartyak.add(new KartyaPanel(new KartyaLap(0, 9), 0, 2));
+        }
+        
         kartyakFrissit();
     }
 
@@ -46,21 +46,22 @@ public class KijelzoJatekter extends Kijelzo {
     
     
     public void addKartya(KartyaLap k){
-        kartyak.add(new KartyaPanel(k, 0));
+        kartyak.add(new KartyaPanel(k, 0, 2));
     }
     
     public void kartyakFrissit(){
         for (int i = 0; i < kartyak.size(); i++) {
             p.remove(kartyak.get(i));
         }
+        int kezd = Main.FOABLAK_SZEL/2-kartyak.size()*10;
         for (int i = kartyak.size()-1; i >= 0; i--) {
             if(i != kartyak.size()-1){
                 kartyak.get(i).setAllapot(1);
             }else{
                 kartyak.get(i).setAllapot(0);
             }
-            kartyak.get(i).setLocation(30+i*10,Main.FOABLAK_MAG/10*7);
-            kartyak.get(i).setSize(35, 59);
+            kartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
+            kartyak.get(i).setSize(35*kartyak.get(i).szorzo, 59*kartyak.get(i).szorzo);
             p.add(kartyak.get(i));
         }
     }

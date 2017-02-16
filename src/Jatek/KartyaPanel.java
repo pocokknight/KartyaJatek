@@ -1,6 +1,7 @@
 package Jatek;
 
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class KartyaPanel extends JPanel {
@@ -9,9 +10,11 @@ public class KartyaPanel extends JPanel {
     int allapot = 0;
     int szorzo = 1;
     
-    KartyaPanel(KartyaLap l,int all){
+    KartyaPanel(KartyaLap l,int all,int sz){
+        addMouseListener(new Listener());
         lap = l;
         allapot = all;
+        szorzo = sz;
         repaint();
     }
     
@@ -46,6 +49,18 @@ public class KartyaPanel extends JPanel {
             default:
                 break;
         }
+    }
+    
+    public class Listener implements MouseListener{
+
+        @Override public void mouseClicked(MouseEvent me) {
+            System.out.println(lap.fajta+" "+lap.getErtS());
+        }
+        @Override public void mousePressed(MouseEvent me) {}
+        @Override public void mouseReleased(MouseEvent me) {}
+        @Override public void mouseEntered(MouseEvent me) {}
+        @Override public void mouseExited(MouseEvent me) {}
+        
     }
 
 }
