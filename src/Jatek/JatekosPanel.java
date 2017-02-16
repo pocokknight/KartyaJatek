@@ -1,10 +1,8 @@
 package Jatek;
 
 import static Jatek.Main.*;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.util.*;
 import javax.swing.*;
 
 public class JatekosPanel extends JPanel {
