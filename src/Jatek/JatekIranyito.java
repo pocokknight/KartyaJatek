@@ -21,13 +21,15 @@ public class JatekIranyito {
         leallit = false;
         egyszemelyes = e;
         if(e) botok = new BotJatekos[3];
-        oszt();
     }
 
-    private void oszt() {
+    public void oszt() {
         if(!leallit){
             if(egyszemelyes){
                 for (int i = 0; i < jatekLap; i++) {
+                    System.out.println(jatekter);
+                    System.out.println(jatekter.kartyak);
+                    System.out.println(pakli);
                     jatekter.kartyak.add(new KartyaPanel(pakli.get(0), 0, 2));
                     pakli.remove(0);
                     jatekter.ellenfel1.kartyak.add(pakli.get(0));
@@ -65,6 +67,7 @@ public class JatekIranyito {
                 uj.add(new KartyaLap(i, j));
             }
         }
+        Collections.shuffle(uj);
         return uj;
     }
 

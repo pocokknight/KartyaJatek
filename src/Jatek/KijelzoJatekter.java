@@ -14,12 +14,13 @@ public class KijelzoJatekter extends Kijelzo {
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
-        kartyak = new Vector<KartyaPanel>();
+        kartyak = new Vector();
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
     }
 
     private void egyjatekos() {
+        
         ellenfel1 = new JatekosPanel("Bot 1",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
         ellenfel2 = new JatekosPanel("Bot 2",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
         ellenfel3 = new JatekosPanel("Bot 3",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
@@ -37,6 +38,9 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(ellenfel3);
         
         kartyakFrissit();
+        
+        iranyito = new JatekIranyito(true);
+        iranyito.oszt();
     }
 
     private void tobbjatekos() {
