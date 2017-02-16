@@ -53,7 +53,7 @@ public class KijelzoJatekter extends Kijelzo {
         for (int i = 0; i < kartyak.size(); i++) {
             p.remove(kartyak.get(i));
         }
-        for (int i = 0; i < kartyak.size(); i++) {
+        for (int i = kartyak.size()-1; i >= 0; i--) {
             if(i != kartyak.size()-1){
                 kartyak.get(i).setAllapot(1);
             }else{
