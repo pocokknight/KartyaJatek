@@ -2,9 +2,9 @@ package Jatek;
 
 import static Jatek.Main.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class JatekosPanel extends JPanel {
@@ -12,7 +12,7 @@ public class JatekosPanel extends JPanel {
     JLabel nev,pont,tipp;
     int pontertek = 0;
     int tippertek = 0;
-    int kartyakszama = 0;
+    int kartyakszama = 2;
     int szel,mag;
     
     JatekosPanel(String n,int w,int h){
@@ -40,6 +40,12 @@ public class JatekosPanel extends JPanel {
     public void paintComponent(Graphics g) {
         g.setColor(new Color(nr,ng,nb));
         g.drawRoundRect(0, 0, szel-1, mag-1,10,10);
+        KartyaLap lap = new KartyaLap(0, 0);
+        int tav = (int)((szel-35)/(kartyakszama+1));
+        if(tav > 20) tav = 20;
+        for (int i = 0; i < kartyakszama; i++) {
+            lap.grafikaHatlap(g, tav+i*tav, (int)(mag/10*4.5f), 1);
+        }
     }
 
 }
