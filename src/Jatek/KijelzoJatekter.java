@@ -4,13 +4,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static Jatek.Main.*;
+import java.util.Vector;
 
 public class KijelzoJatekter extends Kijelzo {
 
+    Vector<KartyaPanel> kartyak;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
+        kartyak = new Vector<KartyaPanel>();
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
     }
@@ -31,9 +34,36 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(ellenfel1);
         p.add(ellenfel2);
         p.add(ellenfel3);
+        
+        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
+        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
+        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
+        kartyak.add(new KartyaPanel(new KartyaLap(0, 0),0));
+        kartyakFrissit();
     }
 
     private void tobbjatekos() {}
+    
+    
+    public void addKartya(KartyaLap k){
+        kartyak.add(new KartyaPanel(k, 0));
+    }
+    
+    public void kartyakFrissit(){
+        for (int i = 0; i < kartyak.size(); i++) {
+            p.remove(kartyak.get(i));
+        }
+        for (int i = 0; i < kartyak.size(); i++) {
+            if(i != kartyak.size()-1){
+                kartyak.get(i).setAllapot(1);
+            }else{
+                kartyak.get(i).setAllapot(0);
+            }
+            kartyak.get(i).setLocation(30+i*10,Main.FOABLAK_MAG/10*7);
+            kartyak.get(i).setSize(35, 59);
+            p.add(kartyak.get(i));
+        }
+    }
     
     public class Listener implements MouseListener{
 
