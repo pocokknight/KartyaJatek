@@ -27,9 +27,6 @@ public class JatekIranyito {
         if(!leallit){
             if(egyszemelyes){
                 for (int i = 0; i < jatekLap; i++) {
-                    System.out.println(jatekter);
-                    System.out.println(jatekter.kartyak);
-                    System.out.println(pakli);
                     jatekter.kartyak.add(new KartyaPanel(pakli.get(0), 0, 2));
                     pakli.remove(0);
                     jatekter.ellenfel1.kartyak.add(pakli.get(0));
@@ -58,6 +55,8 @@ public class JatekIranyito {
         }else{
             System.out.println("Játék vége");
         }
+        jatekter.kartyakFrissit();
+        
     }
     
     private Vector<KartyaLap> ujPakli() {

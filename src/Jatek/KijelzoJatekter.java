@@ -38,9 +38,6 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(ellenfel3);
         
         kartyakFrissit();
-        
-        iranyito = new JatekIranyito(true);
-        iranyito.oszt();
     }
 
     private void tobbjatekos() {
@@ -67,6 +64,7 @@ public class KijelzoJatekter extends Kijelzo {
             kartyak.get(i).setSize(35*kartyak.get(i).szorzo, 59*kartyak.get(i).szorzo);
             p.add(kartyak.get(i));
         }
+        p.repaint();
     }
     
     public class Listener implements MouseListener{

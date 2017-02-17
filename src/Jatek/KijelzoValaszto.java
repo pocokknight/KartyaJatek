@@ -36,6 +36,8 @@ public class KijelzoValaszto extends Kijelzo {
             if(me.getSource() == egyjatekos){
                 jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, true);
                 jatekter.setVisible(true);
+                iranyito = new JatekIranyito(true);
+                iranyito.oszt();
                 valaszto.frame.dispose();
             }else if(me.getSource() == tobbjatekos){
                 System.out.println("Még nincs kész");
