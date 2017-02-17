@@ -9,13 +9,16 @@ import static Jatek.Main.*;
 
 public class KijelzoJatekter extends Kijelzo {
 
-    Vector<KartyaPanel> kartyak;
+    Vector<KartyaPanel> jateksoKartyak;
+    Vector<KartyaLap> asztal;
+    boolean rakhat;
     int tipp;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
-        kartyak = new Vector();
+        rakhat = false;
+        jateksoKartyak = new Vector();
         tipp = 0;
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
@@ -48,23 +51,23 @@ public class KijelzoJatekter extends Kijelzo {
     
     
     public void addKartya(KartyaLap k){
-        kartyak.add(new KartyaPanel(k, 0, 2));
+        jateksoKartyak.add(new KartyaPanel(k, 0, 2));
     }
     
     public void kartyakFrissit(){
-        for (int i = 0; i < kartyak.size(); i++) {
-            p.remove(kartyak.get(i));
+        for (int i = 0; i < jateksoKartyak.size(); i++) {
+            p.remove(jateksoKartyak.get(i));
         }
-        int kezd = Main.FOABLAK_SZEL/2-kartyak.size()*10;
-        for (int i = kartyak.size()-1; i >= 0; i--) {
-            if(i != kartyak.size()-1){
-                kartyak.get(i).setAllapot(1);
+        int kezd = Main.FOABLAK_SZEL/2-jateksoKartyak.size()*10;
+        for (int i = jateksoKartyak.size()-1; i >= 0; i--) {
+            if(i != jateksoKartyak.size()-1){
+                jateksoKartyak.get(i).setAllapot(1);
             }else{
-                kartyak.get(i).setAllapot(0);
+                jateksoKartyak.get(i).setAllapot(0);
             }
-            kartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
-            kartyak.get(i).setSize(35*kartyak.get(i).szorzo, 59*kartyak.get(i).szorzo);
-            p.add(kartyak.get(i));
+            jateksoKartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
+            jateksoKartyak.get(i).setSize(35*jateksoKartyak.get(i).szorzo, 59*jateksoKartyak.get(i).szorzo);
+            p.add(jateksoKartyak.get(i));
         }
         p.repaint();
         
@@ -72,9 +75,9 @@ public class KijelzoJatekter extends Kijelzo {
         ellenfel2.tipp.setText("Tipp: "+ellenfel2.tippertek);
         ellenfel3.tipp.setText("Tipp: "+ellenfel3.tippertek);
                         
-        ellenfel1.pont.setText("Pont: "+ellenfel1.pontertek);               
-        ellenfel2.pont.setText("Pont: "+ellenfel2.pontertek);               
-        ellenfel3.pont.setText("Pont: "+ellenfel3.pontertek);               
+        ellenfel1.pont.setText("Pont: "+ellenfel1.osszPontErtek);               
+        ellenfel2.pont.setText("Pont: "+ellenfel2.osszPontErtek);               
+        ellenfel3.pont.setText("Pont: "+ellenfel3.osszPontErtek);               
     }
     
     public class Listener implements MouseListener{

@@ -8,7 +8,8 @@ import javax.swing.*;
 public class JatekosPanel extends JPanel {
 
     JLabel nev,pont,tipp;
-    int pontertek = 0;
+    int osszPontErtek = 0;
+    int korPontErtek = 0;
     int tippertek = 0;
     Vector<KartyaLap> kartyak;
     int szel,mag;
@@ -16,7 +17,7 @@ public class JatekosPanel extends JPanel {
     JatekosPanel(String n,int w,int h){
         kartyak = new Vector<KartyaLap>();
         nev = new JLabel(n);
-        pont = new JLabel("Pont: "+pontertek);
+        pont = new JLabel("Pont: "+osszPontErtek);
         tipp = new JLabel("Tipp: "+tippertek);
         setLayout(null);
         szel = w;

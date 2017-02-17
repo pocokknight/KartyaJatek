@@ -26,7 +26,7 @@ public class JatekIranyito {
         if(!leallit){
             if(egyszemelyes){
                 for (int i = 0; i < jatekLap; i++) {
-                    jatekter.kartyak.add(new KartyaPanel(pakli.get(0), 0, 2));
+                    jatekter.jateksoKartyak.add(new KartyaPanel(pakli.get(0), 0, 2));
                     pakli.remove(0);
                     jatekter.ellenfel1.kartyak.add(pakli.get(0));
                     pakli.remove(0);
@@ -87,4 +87,40 @@ public class JatekIranyito {
         tbk.setVisible(true);
     }
 
+    void botKartyaRakas() {
+        int letszam = 4;
+        if(!egyszemelyes){
+            
+        }
+        for (int i = 0; i < letszam; i++) {
+            switch (korJatekos){
+                case 0:
+                    jatekosRak();
+                    break;
+                case 1:
+                    BotJatekos.getRakas(jatekter.ellenfel1,jatekter.asztal);
+                    break;
+                case 2:
+                    BotJatekos.getRakas(jatekter.ellenfel2,jatekter.asztal);
+                    break;
+                case 3:
+                    BotJatekos.getRakas(jatekter.ellenfel3,jatekter.asztal);
+                    break;
+            }
+            kovJatekos();
+        }
+    }
+
+    void kovJatekos(){
+        korJatekos++;
+        if(egyszemelyes){
+            if(korJatekos>4) korJatekos %= 4;
+        }else{
+            
+        }
+    }
+
+    private void jatekosRak() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

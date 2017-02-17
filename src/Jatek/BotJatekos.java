@@ -15,5 +15,9 @@ public class BotJatekos {
         }
         return tipp;
     }
+
+    public static int getRakas(JatekosPanel p, Vector<KartyaLap> asztal) {
+        return 0;
+    }
     
 }

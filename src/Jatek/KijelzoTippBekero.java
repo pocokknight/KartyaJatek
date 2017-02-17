@@ -36,6 +36,7 @@ public class KijelzoTippBekero extends Kijelzo {
                 try{
                     t = Integer.parseInt(mezo.getText());
                     jatekter.tipp = t;
+                    iranyito.botKartyaRakas();
                     frame.dispose();
                 }catch(Exception e){
                     hiba = new KijelzoHiba("A mezőben nem szám szerepel!.", FOABLAK_SZEL/3, FOABLAK_MAG/4);
