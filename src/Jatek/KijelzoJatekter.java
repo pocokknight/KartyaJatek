@@ -65,6 +65,14 @@ public class KijelzoJatekter extends Kijelzo {
             p.add(kartyak.get(i));
         }
         p.repaint();
+        
+        ellenfel1.tipp.setText("Tipp: "+ellenfel1.tippertek);
+        ellenfel2.tipp.setText("Tipp: "+ellenfel2.tippertek);
+        ellenfel3.tipp.setText("Tipp: "+ellenfel3.tippertek);
+                        
+        ellenfel1.pont.setText("Pont: "+ellenfel1.pontertek);               
+        ellenfel2.pont.setText("Pont: "+ellenfel2.pontertek);               
+        ellenfel3.pont.setText("Pont: "+ellenfel3.pontertek);               
     }
     
     public class Listener implements MouseListener{

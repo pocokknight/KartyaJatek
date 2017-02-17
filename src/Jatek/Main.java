@@ -25,6 +25,8 @@ public class Main {
     public static void main(String[] args) {
         new Main();
     }
+    
+    public static int vel(int a, int b){ return (int)(Math.random()*(b-a+1)+a);}
 
     /*
     public class Listener implements MouseListener{

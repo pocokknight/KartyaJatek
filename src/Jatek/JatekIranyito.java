@@ -11,7 +11,6 @@ public class JatekIranyito {
     boolean leallit;
     boolean kartyaszamno;
     boolean egyszemelyes;
-    BotJatekos[] botok;
     
     public JatekIranyito(boolean e) {
         kartyaszamno = true;
@@ -20,7 +19,6 @@ public class JatekIranyito {
         korLap = 0;
         leallit = false;
         egyszemelyes = e;
-        if(e) botok = new BotJatekos[3];
     }
 
     public void oszt() {
@@ -56,7 +54,11 @@ public class JatekIranyito {
             System.out.println("Játék vége");
         }
         jatekter.kartyakFrissit();
-        
+        if(egyszemelyes){
+            botTipp();
+        }else{
+            //jatekos tipp
+        }
     }
     
     private Vector<KartyaLap> ujPakli() {
@@ -68,6 +70,14 @@ public class JatekIranyito {
         }
         Collections.shuffle(uj);
         return uj;
+    }
+
+    private void botTipp() {
+        jatekter.ellenfel1.tippertek = BotJatekos.getTipp(jatekter.ellenfel1.kartyak);
+        jatekter.ellenfel2.tippertek = BotJatekos.getTipp(jatekter.ellenfel2.kartyak);
+        jatekter.ellenfel3.tippertek = BotJatekos.getTipp(jatekter.ellenfel3.kartyak);
+        
+        jatekter.kartyakFrissit();
     }
 
 }
