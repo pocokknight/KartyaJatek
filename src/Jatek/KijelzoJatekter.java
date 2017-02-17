@@ -10,11 +10,13 @@ import static Jatek.Main.*;
 public class KijelzoJatekter extends Kijelzo {
 
     Vector<KartyaPanel> kartyak;
+    int tipp;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
         kartyak = new Vector();
+        tipp = 0;
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
     }

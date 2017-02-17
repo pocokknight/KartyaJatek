@@ -7,7 +7,7 @@ public class JatekIranyito {
     
     Timer tipp = new Timer();
     Vector<KartyaLap> pakli;
-    int jatekLap,korLap;
+    int jatekLap,korLap,korJatekos;
     boolean leallit;
     boolean kartyaszamno;
     boolean egyszemelyes;
@@ -17,6 +17,7 @@ public class JatekIranyito {
         pakli = ujPakli();
         jatekLap = 1;
         korLap = 0;
+        korJatekos = 0;
         leallit = false;
         egyszemelyes = e;
     }
@@ -78,6 +79,12 @@ public class JatekIranyito {
         jatekter.ellenfel3.tippertek = BotJatekos.getTipp(jatekter.ellenfel3.kartyak);
         
         jatekter.kartyakFrissit();
+        jatekosTipp();
+    }
+
+    private void jatekosTipp() {
+        tbk = new KijelzoTippBekero("Kérem adja meg a tippjét", FOABLAK_SZEL/3, FOABLAK_MAG/4, false);
+        tbk.setVisible(true);
     }
 
 }

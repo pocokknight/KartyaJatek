@@ -14,6 +14,7 @@ public class Main {
     public static KijelzoNevBekero nbk;
     public static KijelzoValaszto valaszto;
     public static KijelzoJatekter jatekter;
+    public static KijelzoTippBekero tbk;
     public static JatekIranyito iranyito;
     
     Main(){
