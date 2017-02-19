@@ -26,7 +26,9 @@ public class JatekIranyito {
         if(!leallit){
             if(egyszemelyes){
                 for (int i = 0; i < jatekLap; i++) {
-                    jatekter.jateksoKartyak.add(new KartyaPanel(pakli.get(0), 0, 2));
+                    KartyaPanel kp = new KartyaPanel(pakli.get(0), 0, 2);
+                    jatekter.jatekosKartyak.add(kp);
+                    kp.addMouseListener(jatekter.listener);
                     pakli.remove(0);
                     jatekter.ellenfel1.kartyak.add(pakli.get(0));
                     pakli.remove(0);
@@ -88,29 +90,47 @@ public class JatekIranyito {
     }
 
     void botKartyaRakas() {
-        int letszam = 4;
-        if(!egyszemelyes){
-            
-        }
-        for (int i = 0; i < letszam; i++) {
+        jatekosRak();
+        jatekter.asztal = new Vector<KartyaLap>();
+        int letszam = 0;
+        int a = 0;
+            jatekter.p.repaint();
             switch (korJatekos){
                 case 0:
-                    jatekosRak();
+                    if(!jatekter.rakhat)
+                    letszam++;
                     break;
                 case 1:
-                    BotJatekos.getRakas(jatekter.ellenfel1,jatekter.asztal);
+                    a = BotJatekos.getRakas(jatekter.ellenfel1);
+                    jatekter.ellenfel1.kivalasztottKartya = jatekter.ellenfel1.kartyak.get(a);
+                    jatekter.asztal.add(jatekter.ellenfel1.kartyak.get(a));
+                    jatekter.ellenfel1.kartyak.get(a).rakta = jatekter.ellenfel1.nev.getText();
+                    jatekter.ellenfel1.kartyak.remove(a);
+                    kovJatekos();
+                    letszam++;
                     break;
                 case 2:
-                    BotJatekos.getRakas(jatekter.ellenfel2,jatekter.asztal);
+                    a = BotJatekos.getRakas(jatekter.ellenfel2);
+                    jatekter.ellenfel2.kivalasztottKartya = jatekter.ellenfel2.kartyak.get(a);
+                    jatekter.asztal.add(jatekter.ellenfel2.kartyak.get(a));
+                    jatekter.ellenfel2.kartyak.get(a).rakta = jatekter.ellenfel2.nev.getText();
+                    jatekter.ellenfel2.kartyak.remove(a);
+                    kovJatekos();
+                    letszam++;
                     break;
                 case 3:
-                    BotJatekos.getRakas(jatekter.ellenfel3,jatekter.asztal);
+                    a = BotJatekos.getRakas(jatekter.ellenfel3);
+                    jatekter.ellenfel3.kivalasztottKartya = jatekter.ellenfel3.kartyak.get(a);
+                    jatekter.asztal.add(jatekter.ellenfel3.kartyak.get(a));
+                    jatekter.ellenfel3.kartyak.get(a).rakta = jatekter.ellenfel3.nev.getText();
+                    jatekter.ellenfel3.kartyak.remove(a);
+                    kovJatekos();
+                    letszam++;
                     break;
             }
-            kovJatekos();
-        }
+        System.out.println("mindenki rakott");
     }
-
+    
     void kovJatekos(){
         korJatekos++;
         if(egyszemelyes){
@@ -121,6 +141,6 @@ public class JatekIranyito {
     }
 
     private void jatekosRak() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jatekter.rakhat = true;
     }
 }

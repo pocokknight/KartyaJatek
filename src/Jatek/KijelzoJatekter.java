@@ -9,16 +9,17 @@ import static Jatek.Main.*;
 
 public class KijelzoJatekter extends Kijelzo {
 
-    Vector<KartyaPanel> jateksoKartyak;
+    Vector<KartyaPanel> jatekosKartyak;
     Vector<KartyaLap> asztal;
     boolean rakhat;
     int tipp;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
+    Listener listener = new Listener();
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
         rakhat = false;
-        jateksoKartyak = new Vector();
+        jatekosKartyak = new Vector();
         tipp = 0;
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
@@ -30,9 +31,9 @@ public class KijelzoJatekter extends Kijelzo {
         ellenfel2 = new JatekosPanel("Bot 2",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
         ellenfel3 = new JatekosPanel("Bot 3",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
         
-        ellenfel1.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
-        ellenfel2.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
-        ellenfel3.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
+        ellenfel1.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
+        ellenfel2.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
+        ellenfel3.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
         
         ellenfel1.setLocation(FOABLAK_SZEL/10*1,FOABLAK_MAG/30);
         ellenfel2.setLocation(FOABLAK_SZEL/10*4,FOABLAK_MAG/30);
@@ -51,23 +52,23 @@ public class KijelzoJatekter extends Kijelzo {
     
     
     public void addKartya(KartyaLap k){
-        jateksoKartyak.add(new KartyaPanel(k, 0, 2));
+        jatekosKartyak.add(new KartyaPanel(k, 0, 2));
     }
     
     public void kartyakFrissit(){
-        for (int i = 0; i < jateksoKartyak.size(); i++) {
-            p.remove(jateksoKartyak.get(i));
+        for (int i = 0; i < jatekosKartyak.size(); i++) {
+            p.remove(jatekosKartyak.get(i));
         }
-        int kezd = Main.FOABLAK_SZEL/2-jateksoKartyak.size()*10;
-        for (int i = jateksoKartyak.size()-1; i >= 0; i--) {
-            if(i != jateksoKartyak.size()-1){
-                jateksoKartyak.get(i).setAllapot(1);
+        int kezd = Main.FOABLAK_SZEL/2-jatekosKartyak.size()*10;
+        for (int i = jatekosKartyak.size()-1; i >= 0; i--) {
+            if(i != jatekosKartyak.size()-1){
+                jatekosKartyak.get(i).setAllapot(1);
             }else{
-                jateksoKartyak.get(i).setAllapot(0);
+                jatekosKartyak.get(i).setAllapot(0);
             }
-            jateksoKartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
-            jateksoKartyak.get(i).setSize(35*jateksoKartyak.get(i).szorzo, 59*jateksoKartyak.get(i).szorzo);
-            p.add(jateksoKartyak.get(i));
+            jatekosKartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
+            jatekosKartyak.get(i).setSize(35*jatekosKartyak.get(i).szorzo, 59*jatekosKartyak.get(i).szorzo);
+            p.add(jatekosKartyak.get(i));
         }
         p.repaint();
         
@@ -82,7 +83,16 @@ public class KijelzoJatekter extends Kijelzo {
     
     public class Listener implements MouseListener{
 
-        @Override public void mouseClicked(MouseEvent me) {}
+        @Override public void mouseClicked(MouseEvent me) {
+            if(rakhat)
+            for (int i = 0; i < jatekosKartyak.size(); i++) {
+                if(jatekosKartyak.get(i).equals(me.getSource())){
+                    jatekosKartyak.get(i).lap.kijelolt = true;
+                    jatekter.rakhat = false;
+                    iranyito.kovJatekos();
+                }
+            }
+        }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
         @Override public void mouseEntered(MouseEvent me) {}

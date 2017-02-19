@@ -12,6 +12,7 @@ public class JatekosPanel extends JPanel {
     int korPontErtek = 0;
     int tippertek = 0;
     Vector<KartyaLap> kartyak;
+    KartyaLap kivalasztottKartya;
     int szel,mag;
     
     JatekosPanel(String n,int w,int h){
@@ -45,6 +46,11 @@ public class JatekosPanel extends JPanel {
         if(tav > 20) tav = 20;
         for (int i = 0; i < kartyak.size(); i++) {
             lap.grafikaHatlap(g, tav+i*tav, (int)(mag/10*4.5f), 1);
+        }
+        if(kivalasztottKartya != null){
+            kivalasztottKartya.grafikaTeljes(g, szel/2-35, 125, 2);
+        }else{
+            g.drawRoundRect(szel/2-35, 125, 70, 118, 10, 10);
         }
     }
 

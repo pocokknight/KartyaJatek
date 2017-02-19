@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.Vector;
 
-public class KartyaLap{
+public class KartyaLap implements Comparable{
 
     String rakta;
     int ertek;
@@ -54,6 +54,12 @@ public class KartyaLap{
             if(ertek>8 && ertek<12)
             kepasz = Szinezo.szinez("164 6 32", kepasz);
         }
+    }
+    
+    @Override
+    public int compareTo(Object o){
+        KartyaLap masik = (KartyaLap) o;
+        return ertek-masik.ertek;
     }
     
     public void grafikaHatlap(Graphics g, int x, int y, int szorzo){

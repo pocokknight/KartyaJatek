@@ -22,6 +22,7 @@ public class KijelzoTippBekero extends Kijelzo {
         mezo.setLocation(getSzel()/2-mezo.getWidth()/2, getMag()/5);
         p.add(mezo);
         ok.addMouseListener(new Listener());
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
     
     
@@ -36,12 +37,12 @@ public class KijelzoTippBekero extends Kijelzo {
                 try{
                     t = Integer.parseInt(mezo.getText());
                     jatekter.tipp = t;
-                    iranyito.botKartyaRakas();
                     frame.dispose();
                 }catch(Exception e){
                     hiba = new KijelzoHiba("A mezőben nem szám szerepel!.", FOABLAK_SZEL/3, FOABLAK_MAG/4);
                 }
             }
+            iranyito.botKartyaRakas();
         }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
