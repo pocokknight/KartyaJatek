@@ -83,16 +83,7 @@ public class KijelzoJatekter extends Kijelzo {
     
     public class Listener implements MouseListener{
 
-        @Override public void mouseClicked(MouseEvent me) {
-            if(rakhat)
-            for (int i = 0; i < jatekosKartyak.size(); i++) {
-                if(jatekosKartyak.get(i).equals(me.getSource())){
-                    jatekosKartyak.get(i).lap.kijelolt = true;
-                    jatekter.rakhat = false;
-                    iranyito.kovJatekos();
-                }
-            }
-        }
+        @Override public void mouseClicked(MouseEvent me) {}
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
         @Override public void mouseEntered(MouseEvent me) {}

@@ -1,11 +1,14 @@
 package Jatek;
 
 import static Jatek.Main.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import java.util.*;
 
 public class JatekIranyito {
     
-    Timer tipp = new Timer();
+    Timer kartyamozgato;
     Vector<KartyaLap> pakli;
     int jatekLap,korLap,korJatekos;
     boolean leallit;
@@ -20,9 +23,15 @@ public class JatekIranyito {
         korJatekos = 0;
         leallit = false;
         egyszemelyes = e;
+        if(e){
+            letszam = 4;
+        }else{
+            
+        }
     }
 
     public void oszt() {
+        jatekter.asztal = new Vector<KartyaLap>();
         if(!leallit){
             if(egyszemelyes){
                 for (int i = 0; i < jatekLap; i++) {
@@ -85,62 +94,116 @@ public class JatekIranyito {
     }
 
     private void jatekosTipp() {
-        tbk = new KijelzoTippBekero("Kérem adja meg a tippjét", FOABLAK_SZEL/3, FOABLAK_MAG/4, false);
+        tbk = new KijelzoTippBekero("Kérem adja meg a tippjét", FOABLAK_SZEL/3, FOABLAK_MAG/4, false , egyszemelyes);
         tbk.setVisible(true);
     }
 
-    void botKartyaRakas() {
-        jatekosRak();
-        jatekter.asztal = new Vector<KartyaLap>();
-        int letszam = 0;
-        int a = 0;
-            jatekter.p.repaint();
-            switch (korJatekos){
-                case 0:
-                    if(!jatekter.rakhat)
-                    letszam++;
-                    break;
-                case 1:
-                    a = BotJatekos.getRakas(jatekter.ellenfel1);
-                    jatekter.ellenfel1.kivalasztottKartya = jatekter.ellenfel1.kartyak.get(a);
-                    jatekter.asztal.add(jatekter.ellenfel1.kartyak.get(a));
-                    jatekter.ellenfel1.kartyak.get(a).rakta = jatekter.ellenfel1.nev.getText();
-                    jatekter.ellenfel1.kartyak.remove(a);
-                    kovJatekos();
-                    letszam++;
-                    break;
-                case 2:
-                    a = BotJatekos.getRakas(jatekter.ellenfel2);
-                    jatekter.ellenfel2.kivalasztottKartya = jatekter.ellenfel2.kartyak.get(a);
-                    jatekter.asztal.add(jatekter.ellenfel2.kartyak.get(a));
-                    jatekter.ellenfel2.kartyak.get(a).rakta = jatekter.ellenfel2.nev.getText();
-                    jatekter.ellenfel2.kartyak.remove(a);
-                    kovJatekos();
-                    letszam++;
-                    break;
-                case 3:
-                    a = BotJatekos.getRakas(jatekter.ellenfel3);
-                    jatekter.ellenfel3.kivalasztottKartya = jatekter.ellenfel3.kartyak.get(a);
-                    jatekter.asztal.add(jatekter.ellenfel3.kartyak.get(a));
-                    jatekter.ellenfel3.kartyak.get(a).rakta = jatekter.ellenfel3.nev.getText();
-                    jatekter.ellenfel3.kartyak.remove(a);
-                    kovJatekos();
-                    letszam++;
-                    break;
-            }
-        System.out.println("mindenki rakott");
-    }
+    int letszam;
+    int sorszam = 0;
     
-    void kovJatekos(){
-        korJatekos++;
-        if(egyszemelyes){
-            if(korJatekos>4) korJatekos %= 4;
+    void botKartyaRakas() {
+        //System.out.println(sorszam+" "+letszam+" "+korJatekos);
+        if (sorszam == letszam) {
+            sorszam = 0;
+            korPontSzamit();
+            System.out.println("korvege");
         }else{
-            
+            if (korJatekos == 0) {
+                sorszam++;
+                korJatekos++;
+                if (korJatekos == letszam) {
+                    korJatekos = 0;
+                }
+                jatekosRak();
+            } else if (korJatekos == 1) {
+                sorszam++;
+                korJatekos++;
+                if (korJatekos == letszam) {
+                    korJatekos = 0;
+                }
+                botRak(jatekter.ellenfel1);
+            } else if (korJatekos == 2) {
+                sorszam++;
+                korJatekos++;
+                if (korJatekos == letszam) {
+                    korJatekos = 0;
+                }
+                botRak(jatekter.ellenfel2);
+            } else if (korJatekos == 3) {
+                sorszam++;
+                korJatekos++;
+                if (korJatekos == letszam) {
+                    korJatekos = 0;
+                }
+                botRak(jatekter.ellenfel3);
+            }
         }
     }
 
     private void jatekosRak() {
         jatekter.rakhat = true;
+        System.out.println("Te raksz");
+    }
+
+    private void korPontSzamit() {
+        korLap++;
+        if(korLap == jatekLap){
+            korLap = 0;
+            //kartyavizsgalat
+            jatekter.asztal = new Vector<KartyaLap>();
+            oszt();
+        }else{
+            //kartyavizsgalat
+            jatekter.asztal = new Vector<KartyaLap>();
+            botKartyaRakas();
+        }
+    }
+
+    private void botRak(JatekosPanel e) {
+        System.out.println(e.nev.getText());
+        int kartya = BotJatekos.getRakas(e);
+        e.kivalasztottKartya = e.kartyak.get(kartya);
+        e.kivalasztottKartya.rakta = e.nev.getText();
+        e.kartyak.remove(kartya);
+        mozgat(e);
+    }
+
+    private void mozgat(JatekosPanel e) {
+        e.pozx = 20;
+        e.pozy = e.pozys;
+        e.mozgat = true;
+        kartyamozgato = new Timer(1,new Mozgato(e));
+        kartyamozgato.start();
+        //e.mozgat = false;
+    }
+
+    class Mozgato implements ActionListener {
+
+        JatekosPanel j;
+        
+        private Mozgato(JatekosPanel e) {
+            j = e;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (j.pozy != j.pozyig) {
+                System.out.println(j.pozx);
+                j.pozx += 3;
+                if (j.pozx < j.pozxig) {
+                    j.pozx = j.pozxig;
+                }
+                j.pozy += 4;
+                if (j.pozy > j.pozyig) {
+                    j.pozy = j.pozyig;
+                }
+                jatekter.p.repaint();
+            }else{
+                j.mozgat = false;
+                jatekter.p.repaint();
+                kartyamozgato.stop();
+                botKartyaRakas();
+            }
+        }
     }
 }

@@ -37,17 +37,27 @@ public class JatekosPanel extends JPanel {
         add(tipp);
     }
     
+    final int pozxs = 20, pozys = (int)(mag/10*4.5f);
+    final int pozxig = szel/2-35,pozyig = 125;
+    int pozx = 20,pozy = (int)(mag/10*4.5f);
+    boolean mozgat = false;
+    
+    
     @Override
     public void paintComponent(Graphics g) {
         g.setColor(new Color(nr,ng,nb));
         g.drawRoundRect(0, 0, szel-1, mag-1,10,10);
         KartyaLap lap = new KartyaLap(0, 0);
+        if(mozgat) {
+            System.out.println((int)pozx+" "+(int)pozy);
+            lap.grafikaHatlap(g, (int)pozx, (int)pozy, 1);
+        }
         int tav = (int)((szel-35)/(kartyak.size()+1));
         if(tav > 20) tav = 20;
         for (int i = 0; i < kartyak.size(); i++) {
             lap.grafikaHatlap(g, tav+i*tav, (int)(mag/10*4.5f), 1);
         }
-        if(kivalasztottKartya != null){
+        if(kivalasztottKartya != null && !mozgat){
             kivalasztottKartya.grafikaTeljes(g, szel/2-35, 125, 2);
         }else{
             g.drawRoundRect(szel/2-35, 125, 70, 118, 10, 10);

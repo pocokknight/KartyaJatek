@@ -10,9 +10,11 @@ public class KijelzoTippBekero extends Kijelzo {
     Gomb ok;
     JTextField mezo;
     KijelzoHiba hiba;
+    boolean egyszemelyes;
     
-    public KijelzoTippBekero(String cim, int w, int h, boolean kilepos) {
+    public KijelzoTippBekero(String cim, int w, int h, boolean kilepos, boolean e) {
         super(cim, w, h, kilepos);
+        egyszemelyes = e;
         ok = new Gomb("Rendben",getSzel()/2,getMag()/5);
         ok.setLocation(getSzel()/2-ok.getWidth()/2, getMag()/2);
         p.add(ok);
@@ -42,7 +44,7 @@ public class KijelzoTippBekero extends Kijelzo {
                     hiba = new KijelzoHiba("A mezőben nem szám szerepel!.", FOABLAK_SZEL/3, FOABLAK_MAG/4);
                 }
             }
-            iranyito.botKartyaRakas();
+            if(egyszemelyes) iranyito.botKartyaRakas();
         }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}

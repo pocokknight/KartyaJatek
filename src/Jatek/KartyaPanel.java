@@ -1,5 +1,6 @@
 package Jatek;
 
+import static Jatek.Main.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -54,7 +55,14 @@ public class KartyaPanel extends JPanel {
     public class Listener implements MouseListener{
 
         @Override public void mouseClicked(MouseEvent me) {
-            System.out.println(lap.fajta+" "+lap.getErtS());
+            if(jatekter.rakhat)
+            for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
+                if(jatekter.jatekosKartyak.get(i).equals(me.getSource())){
+                    jatekter.jatekosKartyak.get(i).lap.kijelolt = true;
+                    jatekter.rakhat = false;
+                    iranyito.botKartyaRakas();
+                }
+            }
         }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
