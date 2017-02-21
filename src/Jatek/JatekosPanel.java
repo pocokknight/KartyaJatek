@@ -37,6 +37,11 @@ public class JatekosPanel extends JPanel {
         add(tipp);
     }
     
+    void labelfrissit(){
+        pont.setText("Pont: "+osszPontErtek);
+        tipp.setText("Tipp: "+tippertek);
+    }
+    
     final int pozxs = 20, pozys = (int)(mag/10*4.5f);
     final int pozxig = szel/2-35,pozyig = 125;
     int pozx = 20,pozy = (int)(mag/10*4.5f);
@@ -49,7 +54,6 @@ public class JatekosPanel extends JPanel {
         g.drawRoundRect(0, 0, szel-1, mag-1,10,10);
         KartyaLap lap = new KartyaLap(0, 0);
         if(mozgat) {
-            System.out.println((int)pozx+" "+(int)pozy);
             lap.grafikaHatlap(g, (int)pozx, (int)pozy, 1);
         }
         int tav = (int)((szel-35)/(kartyak.size()+1));

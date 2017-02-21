@@ -19,7 +19,7 @@ public class JatekIranyito {
         kartyaszamno = true;
         pakli = ujPakli();
         jatekLap = 1;
-        korLap = 0;
+        korLap = 1;
         korJatekos = 0;
         leallit = false;
         egyszemelyes = e;
@@ -106,7 +106,6 @@ public class JatekIranyito {
         if (sorszam == letszam) {
             sorszam = 0;
             korPontSzamit();
-            System.out.println("korvege");
         }else{
             if (korJatekos == 0) {
                 sorszam++;
@@ -146,15 +145,19 @@ public class JatekIranyito {
     }
 
     private void korPontSzamit() {
+        System.out.println("korpontszamit");
         korLap++;
         if(korLap == jatekLap){
-            korLap = 0;
-            //kartyavizsgalat
+            korLap = 1;
+            kartyakViszgal(jatekter.asztal);
+            osszesito();
             jatekter.asztal = new Vector<KartyaLap>();
+            jatekter.p.repaint();
             oszt();
         }else{
-            //kartyavizsgalat
+            kartyakViszgal(jatekter.asztal);
             jatekter.asztal = new Vector<KartyaLap>();
+            jatekter.p.repaint();
             botKartyaRakas();
         }
     }
@@ -177,6 +180,43 @@ public class JatekIranyito {
         //e.mozgat = false;
     }
 
+    private void kartyakViszgal(Vector<KartyaLap> a) {
+        System.out.println("kartyakvizsgal");
+        int poz = -1;
+        int ertek = -1;
+        for (int i = 0; i < a.size(); i++) {
+            if(a.get(i).ertek >= ertek){
+                poz = i;
+                ertek = a.get(i).ertek;
+            }
+        }
+        switch(a.get(poz).rakta){
+            case "jatekos":
+                jatekter.jatekosKorPont++;
+                break;
+            case "Bot 1":
+                jatekter.ellenfel1.korPontErtek++;
+                break;
+            case "Bot 2":
+                jatekter.ellenfel2.korPontErtek++;
+                break;
+            case "Bot 3":
+                jatekter.ellenfel3.korPontErtek++;
+                break;
+        }
+    }
+
+    private void osszesito() {
+        System.out.println("osszesito");
+        jatekter.ellenfel1.osszPontErtek += jatekter.ellenfel1.tippertek == jatekter.ellenfel1.korPontErtek ? 1 : (jatekter.ellenfel1.tippertek > jatekter.ellenfel1.korPontErtek ? jatekter.ellenfel1.korPontErtek-jatekter.ellenfel1.tippertek : jatekter.ellenfel1.tippertek-jatekter.ellenfel1.korPontErtek);
+        jatekter.ellenfel2.osszPontErtek += jatekter.ellenfel2.tippertek == jatekter.ellenfel2.korPontErtek ? 1 : (jatekter.ellenfel2.tippertek > jatekter.ellenfel2.korPontErtek ? jatekter.ellenfel2.korPontErtek-jatekter.ellenfel2.tippertek : jatekter.ellenfel2.tippertek-jatekter.ellenfel2.korPontErtek);
+        jatekter.ellenfel3.osszPontErtek += jatekter.ellenfel3.tippertek == jatekter.ellenfel3.korPontErtek ? 1 : (jatekter.ellenfel3.tippertek > jatekter.ellenfel3.korPontErtek ? jatekter.ellenfel3.korPontErtek-jatekter.ellenfel3.tippertek : jatekter.ellenfel3.tippertek-jatekter.ellenfel3.korPontErtek);
+        jatekter.jatekosOsszPont += jatekter.jatekosTipp == jatekter.jatekosKorPont ? 1 : (jatekter.jatekosTipp > jatekter.jatekosKorPont ? jatekter.jatekosKorPont-jatekter.jatekosTipp : jatekter.jatekosTipp-jatekter.jatekosKorPont);
+        jatekter.ellenfel1.labelfrissit();
+        jatekter.ellenfel2.labelfrissit();
+        jatekter.ellenfel3.labelfrissit();
+    }
+
     class Mozgato implements ActionListener {
 
         JatekosPanel j;
@@ -188,12 +228,11 @@ public class JatekIranyito {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (j.pozy != j.pozyig) {
-                System.out.println(j.pozx);
-                j.pozx += 3;
+                j.pozx += 4;
                 if (j.pozx < j.pozxig) {
                     j.pozx = j.pozxig;
                 }
-                j.pozy += 4;
+                j.pozy += 6;
                 if (j.pozy > j.pozyig) {
                     j.pozy = j.pozyig;
                 }

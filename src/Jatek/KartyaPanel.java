@@ -58,7 +58,9 @@ public class KartyaPanel extends JPanel {
             if(jatekter.rakhat)
             for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
                 if(jatekter.jatekosKartyak.get(i).equals(me.getSource())){
-                    jatekter.jatekosKartyak.get(i).lap.kijelolt = true;
+                    jatekter.jatekosKartyak.get(i).lap.rakta = "jatekos";
+                    jatekter.asztal.add(jatekter.jatekosKartyak.get(i).lap);
+                    jatekter.jatekosKartyak.remove(i);
                     jatekter.rakhat = false;
                     iranyito.botKartyaRakas();
                 }

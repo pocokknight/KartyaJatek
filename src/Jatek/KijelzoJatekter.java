@@ -12,7 +12,7 @@ public class KijelzoJatekter extends Kijelzo {
     Vector<KartyaPanel> jatekosKartyak;
     Vector<KartyaLap> asztal;
     boolean rakhat;
-    int tipp;
+    int jatekosTipp,jatekosKorPont,jatekosOsszPont;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     Listener listener = new Listener();
     
@@ -20,7 +20,9 @@ public class KijelzoJatekter extends Kijelzo {
         super(cim, w, h, true);
         rakhat = false;
         jatekosKartyak = new Vector();
-        tipp = 0;
+        jatekosTipp = 0;
+        jatekosKorPont = 0;
+        jatekosOsszPont = 0;
         if(egyjatekos) egyjatekos();
         else tobbjatekos();
     }
