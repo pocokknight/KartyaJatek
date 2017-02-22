@@ -9,6 +9,7 @@ import java.util.*;
 public class JatekIranyito {
     
     Timer kartyamozgato;
+    Timer kiirotimer;
     Vector<KartyaLap> pakli;
     int jatekLap,korLap,korJatekos;
     boolean leallit;
@@ -146,19 +147,19 @@ public class JatekIranyito {
 
     private void korPontSzamit() {
         System.out.println("korpontszamit");
+        Kiiro k;
         korLap++;
         if(korLap == jatekLap){
             korLap = 1;
-            kartyakViszgal(jatekter.asztal);
-            osszesito();
-            jatekter.asztal = new Vector<KartyaLap>();
-            jatekter.p.repaint();
-            oszt();
+            String gyoztes = kartyakViszgal(jatekter.asztal);
+            k = new Kiiro(gyoztes+" el a kört.",true);
+            kiirotimer = new Timer(3000,k);
+            kiirotimer.start();
         }else{
-            kartyakViszgal(jatekter.asztal);
-            jatekter.asztal = new Vector<KartyaLap>();
-            jatekter.p.repaint();
-            botKartyaRakas();
+            String gyoztes = kartyakViszgal(jatekter.asztal);
+            k = new Kiiro(gyoztes+" el a kört.",false);
+            kiirotimer = new Timer(3000,k);
+            kiirotimer.start();
         }
     }
 
@@ -180,7 +181,7 @@ public class JatekIranyito {
         //e.mozgat = false;
     }
 
-    private void kartyakViszgal(Vector<KartyaLap> a) {
+    String kartyakViszgal(Vector<KartyaLap> a) {
         System.out.println("kartyakvizsgal");
         int poz = -1;
         int ertek = -1;
@@ -190,20 +191,29 @@ public class JatekIranyito {
                 ertek = a.get(i).ertek;
             }
         }
+        jatekter.ellenfel1.kivalasztottKartya = null;
+        jatekter.ellenfel2.kivalasztottKartya = null;
+        jatekter.ellenfel3.kivalasztottKartya = null;
+        jatekter.p.remove(jatekter.jatekoskijeloltkartya);
         switch(a.get(poz).rakta){
             case "jatekos":
                 jatekter.jatekosKorPont++;
-                break;
+                korJatekos = 0;
+                return "Te vitted";
             case "Bot 1":
                 jatekter.ellenfel1.korPontErtek++;
-                break;
+                korJatekos = 1;
+                return "Bot 1 vitte";
             case "Bot 2":
                 jatekter.ellenfel2.korPontErtek++;
-                break;
+                korJatekos = 2;
+                return "Bot 2 vitte";
             case "Bot 3":
                 jatekter.ellenfel3.korPontErtek++;
-                break;
+                korJatekos = 3;
+                return "Bot 3 vitte";
         }
+        return "";
     }
 
     private void osszesito() {
@@ -215,6 +225,45 @@ public class JatekIranyito {
         jatekter.ellenfel1.labelfrissit();
         jatekter.ellenfel2.labelfrissit();
         jatekter.ellenfel3.labelfrissit();
+        jatekter.jatekospont.setText("Pontod : "+jatekter.jatekosOsszPont);
+    }
+
+    class Kiiro implements ActionListener {
+
+        String szoveg;
+        int hanyadik = 0;
+        boolean tobbkor;
+        
+        public Kiiro(String sz,boolean tobbkoros) {
+            szoveg = sz;
+            jatekter.kiiras.setText(szoveg);
+            jatekter.kiiras.setVisible(true);
+            tobbkor = tobbkoros;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            hanyadik++;
+            if(hanyadik == 1){
+                jatekter.kiiras.setVisible(true);
+            }else if(hanyadik == 2){
+                if(!tobbkor){
+                    kiirotimer.stop();
+                    jatekter.kiiras.setVisible(false);
+                    jatekter.asztal = new Vector<KartyaLap>();
+                    jatekter.p.repaint();
+                    botKartyaRakas();
+                }else{
+                    kiirotimer.stop();
+                    osszesito();
+                    jatekter.kiiras.setVisible(false);
+                    jatekter.asztal = new Vector<KartyaLap>();
+                    jatekter.p.repaint();
+                    oszt();
+                }
+            }
+        }
+        
     }
 
     class Mozgato implements ActionListener {

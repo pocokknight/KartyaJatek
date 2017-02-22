@@ -10,15 +10,34 @@ import static Jatek.Main.*;
 public class KijelzoJatekter extends Kijelzo {
 
     Vector<KartyaPanel> jatekosKartyak;
+    KartyaPanel jatekoskijeloltkartya;
     Vector<KartyaLap> asztal;
     boolean rakhat;
     int jatekosTipp,jatekosKorPont,jatekosOsszPont;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     Listener listener = new Listener();
+    JLabel jatekospont,jatekostipp,kiiras;
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
         rakhat = false;
+        jatekospont = new JLabel("Pontod : "+jatekosOsszPont);
+        jatekostipp = new JLabel("Utolsó tipped : "+jatekosTipp);
+        kiiras = new JLabel("SZÖVEG AMIT MEG KELL NÉZNED!",JLabel.CENTER);
+        jatekospont.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/30);
+        jatekospont.setLocation(FOABLAK_SZEL/10*4,FOABLAK_MAG/20*18);
+        jatekospont.setForeground(new Color(nr,ng,nb));
+        p.add(jatekospont);
+        jatekostipp.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/30);
+        jatekostipp.setLocation(FOABLAK_SZEL/10*5,FOABLAK_MAG/20*18);
+        jatekostipp.setForeground(new Color(nr,ng,nb));
+        p.add(jatekostipp);
+        kiiras.setSize(FOABLAK_SZEL,FOABLAK_MAG/10);
+        kiiras.setLocation(FOABLAK_SZEL/2-kiiras.getWidth()/2,FOABLAK_MAG/2-kiiras.getHeight()/2);
+        kiiras.setFont(new Font(kiiras.getFont().getName(),kiiras.getFont().getStyle(),FOABLAK_MAG/10));
+        kiiras.setForeground(new Color(nr,ng,nb));
+        p.add(kiiras);
+        kiiras.setVisible(false);
         jatekosKartyak = new Vector();
         jatekosTipp = 0;
         jatekosKorPont = 0;
@@ -68,8 +87,8 @@ public class KijelzoJatekter extends Kijelzo {
             }else{
                 jatekosKartyak.get(i).setAllapot(0);
             }
-            jatekosKartyak.get(i).setLocation(kezd+i*20,Main.FOABLAK_MAG/10*7);
             jatekosKartyak.get(i).setSize(35*jatekosKartyak.get(i).szorzo, 59*jatekosKartyak.get(i).szorzo);
+            jatekosKartyak.get(i).setLocation((kezd+i*20)-jatekosKartyak.get(i).getWidth()/2,Main.FOABLAK_MAG/10*7);
             p.add(jatekosKartyak.get(i));
         }
         p.repaint();
