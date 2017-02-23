@@ -8,7 +8,7 @@ import static Jatek.Main.*;
 public class KijelzoTippBekero extends Kijelzo {
 
     Gomb ok;
-    JTextField mezo;
+    JSpinner mezo;
     KijelzoHiba hiba;
     boolean egyszemelyes;
     
@@ -18,10 +18,17 @@ public class KijelzoTippBekero extends Kijelzo {
         ok = new Gomb("Rendben",getSzel()/2,getMag()/5);
         ok.setLocation(getSzel()/2-ok.getWidth()/2, getMag()/2);
         p.add(ok);
-        mezo = new JTextField();
+        mezo = new JSpinner();
         mezo.setForeground(new Color(nr-szinkul,ng-szinkul,nb-szinkul));
         mezo.setSize(getSzel()/4*3,getMag()/5);
         mezo.setLocation(getSzel()/2-mezo.getWidth()/2, getMag()/5);
+        SpinnerNumberModel model = new SpinnerNumberModel();
+        model.setValue(0);
+        model.setMaximum(15);
+        model.setMinimum(0);
+        mezo.setModel(model);
+        JSpinner.DefaultEditor spinnerEditor = (JSpinner.DefaultEditor)mezo.getEditor();
+        spinnerEditor.getTextField().setHorizontalAlignment(JTextField.CENTER);
         p.add(mezo);
         ok.addMouseListener(new Listener());
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -33,12 +40,11 @@ public class KijelzoTippBekero extends Kijelzo {
         @Override public void mouseClicked(MouseEvent me) {
             int t;
             if(hiba != null)hiba.frame.dispose();
-            if(mezo.getText().equals("")){
+            if(mezo.getValue() == null){
                 hiba = new KijelzoHiba("A mezőben nem szerepel tipp!", FOABLAK_SZEL/3, FOABLAK_MAG/4);
             }else{
                 try{
-                    t = Integer.parseInt(mezo.getText());
-                    jatekter.jatekosTipp = t;
+                    jatekter.jatekosTipp = (int)mezo.getValue();
                     jatekter.jatekostipp.setText("Utolsó tipped : "+jatekter.jatekosTipp);
                     frame.dispose();
                 }catch(Exception e){

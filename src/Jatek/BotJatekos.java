@@ -9,7 +9,6 @@ public class BotJatekos {
         int tipp = 0;
         for (int i = 0; i < v.size(); i++) {
             int vel = Main.vel(0, 12);
-            System.out.println(v.get(i).ertek+" "+vel);
             if(v.get(i).ertek >= vel){
                 tipp++;
             }
@@ -61,7 +60,7 @@ public class BotJatekos {
                 }
             }
         }
-        
+        System.out.println(sorszam);
         return sorszam;
     }
     

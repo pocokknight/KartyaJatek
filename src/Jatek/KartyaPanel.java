@@ -64,6 +64,7 @@ public class KartyaPanel extends JPanel {
                     jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL/2-jatekter.jatekoskijeloltkartya.getWidth()/2, FOABLAK_MAG/2);
                     jatekter.jatekosKartyak.remove(i);
                     jatekter.rakhat = false;
+                    jatekter.kartyakFrissit();
                     iranyito.botKartyaRakas();
                 }
             }

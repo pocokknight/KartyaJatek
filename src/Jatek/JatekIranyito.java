@@ -153,12 +153,12 @@ public class JatekIranyito {
             korLap = 1;
             String gyoztes = kartyakViszgal(jatekter.asztal);
             k = new Kiiro(gyoztes+" el a kört.",true);
-            kiirotimer = new Timer(3000,k);
+            kiirotimer = new Timer(1500,k);
             kiirotimer.start();
         }else{
             String gyoztes = kartyakViszgal(jatekter.asztal);
             k = new Kiiro(gyoztes+" el a kört.",false);
-            kiirotimer = new Timer(3000,k);
+            kiirotimer = new Timer(1500,k);
             kiirotimer.start();
         }
     }
@@ -166,8 +166,11 @@ public class JatekIranyito {
     private void botRak(JatekosPanel e) {
         System.out.println(e.nev.getText());
         int kartya = BotJatekos.getRakas(e);
+        System.out.println("k "+kartya);
         e.kivalasztottKartya = e.kartyak.get(kartya);
         e.kivalasztottKartya.rakta = e.nev.getText();
+        jatekter.asztal.add(e.kivalasztottKartya);
+        System.out.println("kiv: "+e.kivalasztottKartya.ertek);
         e.kartyak.remove(kartya);
         mozgat(e);
     }
@@ -186,15 +189,12 @@ public class JatekIranyito {
         int poz = -1;
         int ertek = -1;
         for (int i = 0; i < a.size(); i++) {
+            System.out.println(a.get(i).rakta);
             if(a.get(i).ertek >= ertek){
                 poz = i;
                 ertek = a.get(i).ertek;
             }
         }
-        jatekter.ellenfel1.kivalasztottKartya = null;
-        jatekter.ellenfel2.kivalasztottKartya = null;
-        jatekter.ellenfel3.kivalasztottKartya = null;
-        jatekter.p.remove(jatekter.jatekoskijeloltkartya);
         switch(a.get(poz).rakta){
             case "jatekos":
                 jatekter.jatekosKorPont++;
@@ -223,8 +223,11 @@ public class JatekIranyito {
         jatekter.ellenfel3.osszPontErtek += jatekter.ellenfel3.tippertek == jatekter.ellenfel3.korPontErtek ? 1 : (jatekter.ellenfel3.tippertek > jatekter.ellenfel3.korPontErtek ? jatekter.ellenfel3.korPontErtek-jatekter.ellenfel3.tippertek : jatekter.ellenfel3.tippertek-jatekter.ellenfel3.korPontErtek);
         jatekter.jatekosOsszPont += jatekter.jatekosTipp == jatekter.jatekosKorPont ? 1 : (jatekter.jatekosTipp > jatekter.jatekosKorPont ? jatekter.jatekosKorPont-jatekter.jatekosTipp : jatekter.jatekosTipp-jatekter.jatekosKorPont);
         jatekter.ellenfel1.labelfrissit();
+        jatekter.ellenfel1.tipp.setText("Tipp : -");
         jatekter.ellenfel2.labelfrissit();
+        jatekter.ellenfel2.tipp.setText("Tipp : -");
         jatekter.ellenfel3.labelfrissit();
+        jatekter.ellenfel3.tipp.setText("Tipp : -");
         jatekter.jatekospont.setText("Pontod : "+jatekter.jatekosOsszPont);
     }
 
@@ -262,6 +265,11 @@ public class JatekIranyito {
                     oszt();
                 }
             }
+            System.out.println("MOST");
+            jatekter.ellenfel1.kivalasztottKartya = null;
+            jatekter.ellenfel2.kivalasztottKartya = null;
+            jatekter.ellenfel3.kivalasztottKartya = null;
+            jatekter.p.remove(jatekter.jatekoskijeloltkartya);
         }
         
     }
