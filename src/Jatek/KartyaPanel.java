@@ -54,19 +54,37 @@ public class KartyaPanel extends JPanel {
     
     public class Listener implements MouseListener{
 
-        @Override public void mouseClicked(MouseEvent me) {
-            if(jatekter.rakhat)
-            for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
-                if(jatekter.jatekosKartyak.get(i).equals(me.getSource())){
-                    jatekter.jatekosKartyak.get(i).lap.rakta = "jatekos";
-                    jatekter.asztal.add(jatekter.jatekosKartyak.get(i).lap);
-                    jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(i);
-                    jatekter.jatekoskijeloltkartya.setAllapot(0);
-                    jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL/2-jatekter.jatekoskijeloltkartya.getWidth()/2, FOABLAK_MAG/2);
-                    jatekter.jatekosKartyak.remove(i);
-                    jatekter.rakhat = false;
-                    jatekter.kartyakFrissit();
-                    iranyito.botKartyaRakas();
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            if (jatekter.rakhat) {
+                if (iranyito != null) {
+                    for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
+                        if (jatekter.jatekosKartyak.get(i).equals(me.getSource())) {
+                            jatekter.jatekosKartyak.get(i).lap.rakta = "jatekos";
+                            jatekter.asztal.add(jatekter.jatekosKartyak.get(i).lap);
+                            jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(i);
+                            jatekter.jatekoskijeloltkartya.setAllapot(0);
+                            jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
+                            jatekter.jatekosKartyak.remove(i);
+                            jatekter.rakhat = false;
+                            jatekter.kartyakFrissit();
+                            iranyito.botKartyaRakas();
+                        }
+                    }
+                }else {
+                    switch (gyakorlo.szovegSzamlalo) {
+                        case 2:
+                            KartyaPanel p = (KartyaPanel)me.getSource();
+                            if(p.lap.ertek == 10){
+                                jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(0);
+                                jatekter.jatekoskijeloltkartya.setAllapot(0);
+                                jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
+                                jatekter.jatekosKartyak.remove(0);
+                                jatekter.rakhat = false;
+                                jatekter.kartyakFrissit();
+                                gyakorlo.korEgy();
+                            }
+                    }
                 }
             }
         }

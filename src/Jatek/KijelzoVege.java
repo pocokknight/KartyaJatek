@@ -52,8 +52,6 @@ public class KijelzoVege extends Kijelzo {
             masodik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*2);
             harmadik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*3);
             negyedik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*4);
-        
-            System.out.println(elso.getText());
             
             kilepes = new Gomb("Vissza",getSzel()/2,getMag()/10);
             kilepes.setLocation(getSzel()/2-kilepes.getWidth()/2, getMag()/10*8);

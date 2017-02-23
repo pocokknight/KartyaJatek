@@ -111,8 +111,14 @@ public class KijelzoJatekter extends Kijelzo {
 
         @Override public void mouseClicked(MouseEvent me) {
             if(me.getSource() == kilepes){
-                iranyito.leallit = !iranyito.leallit;
-                kilepes.label.setText("Kilepes : "+(iranyito.leallit ? "igen" : "nem"));
+                if (iranyito != null) {
+                    iranyito.leallit = !iranyito.leallit;
+                    kilepes.label.setText("Kilepes : " + (iranyito.leallit ? "igen" : "nem"));
+                }
+                if (gyakorlo != null) {
+                    gyakorlo.leallit = !gyakorlo.leallit;
+                    kilepes.label.setText("Kilepes : " + (gyakorlo.leallit ? "igen" : "nem"));
+                }
             }
         }
         @Override public void mousePressed(MouseEvent me) {}

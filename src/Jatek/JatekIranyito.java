@@ -167,11 +167,9 @@ public class JatekIranyito {
     private void botRak(JatekosPanel e) {
         System.out.println(e.nev.getText());
         int kartya = BotJatekos.getRakas(e);
-        System.out.println("k "+kartya);
         e.kivalasztottKartya = e.kartyak.get(kartya);
         e.kivalasztottKartya.rakta = e.nev.getText();
         jatekter.asztal.add(e.kivalasztottKartya);
-        System.out.println("kiv: "+e.kivalasztottKartya.ertek);
         e.kartyak.remove(kartya);
         mozgat(e);
     }

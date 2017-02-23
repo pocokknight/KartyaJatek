@@ -51,7 +51,18 @@ public class KijelzoTippBekero extends Kijelzo {
                     hiba = new KijelzoHiba("A mezőben nem szám szerepel!.", FOABLAK_SZEL/3, FOABLAK_MAG/4);
                 }
             }
-            if(egyszemelyes) iranyito.botKartyaRakas();
+            if (iranyito == null) {
+                gyakorlo.lepes();
+                jatekter.jatekosTipp = 1;
+                jatekter.jatekostipp.setText("Utolsó tipped : 1");
+            } else {
+                if (egyszemelyes){
+                    iranyito.botKartyaRakas();
+                }else{
+                    //tobbszemelyes
+                }
+            }
+
         }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
