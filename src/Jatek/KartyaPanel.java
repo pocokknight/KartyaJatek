@@ -61,6 +61,7 @@ public class KartyaPanel extends JPanel {
                     jatekter.jatekosKartyak.get(i).lap.rakta = "jatekos";
                     jatekter.asztal.add(jatekter.jatekosKartyak.get(i).lap);
                     jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(i);
+                    jatekter.jatekoskijeloltkartya.setAllapot(0);
                     jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL/2-jatekter.jatekoskijeloltkartya.getWidth()/2, FOABLAK_MAG/2);
                     jatekter.jatekosKartyak.remove(i);
                     jatekter.rakhat = false;

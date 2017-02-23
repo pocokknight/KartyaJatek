@@ -42,9 +42,9 @@ public class JatekosPanel extends JPanel {
         tipp.setText("Tipp: "+tippertek);
     }
     
-    final int pozxs = 20, pozys = (int)(mag/10*4.5f);
+    final int pozxs = 20, pozys = 75;
     final int pozxig = szel/2-35,pozyig = 125;
-    int pozx = 20,pozy = (int)(mag/10*4.5f);
+    int pozx = 20,pozy = 75;
     boolean mozgat = false;
     
     
@@ -53,9 +53,6 @@ public class JatekosPanel extends JPanel {
         g.setColor(new Color(nr,ng,nb));
         g.drawRoundRect(0, 0, szel-1, mag-1,10,10);
         KartyaLap lap = new KartyaLap(0, 0);
-        if(mozgat) {
-            lap.grafikaHatlap(g, (int)pozx, (int)pozy, 1);
-        }
         int tav = (int)((szel-35)/(kartyak.size()+1));
         if(tav > 20) tav = 20;
         for (int i = 0; i < kartyak.size(); i++) {
@@ -65,6 +62,9 @@ public class JatekosPanel extends JPanel {
             kivalasztottKartya.grafikaTeljes(g, szel/2-35, 125, 2);
         }else{
             g.drawRoundRect(szel/2-35, 125, 70, 118, 10, 10);
+        }
+        if(mozgat) {
+            lap.grafikaHatlap(g, (int)pozx, (int)pozy, 1);
         }
     }
 

@@ -246,34 +246,33 @@ public class JatekIranyito {
         
         @Override
         public void actionPerformed(ActionEvent ae) {
-            hanyadik++;
-            if(hanyadik == 1){
-                jatekter.kiiras.setVisible(true);
-            }else if(hanyadik == 2){
                 if(!tobbkor){
                     kiirotimer.stop();
                     jatekter.kiiras.setVisible(false);
                     jatekter.asztal = new Vector<KartyaLap>();
                     jatekter.p.repaint();
+                    kartyakTakarit();
                     botKartyaRakas();
                 }else{
                     kiirotimer.stop();
+                    kartyakTakarit();
                     osszesito();
                     jatekter.kiiras.setVisible(false);
                     jatekter.asztal = new Vector<KartyaLap>();
                     jatekter.p.repaint();
                     oszt();
                 }
-            }
-            System.out.println("MOST");
-            jatekter.ellenfel1.kivalasztottKartya = null;
-            jatekter.ellenfel2.kivalasztottKartya = null;
-            jatekter.ellenfel3.kivalasztottKartya = null;
-            jatekter.p.remove(jatekter.jatekoskijeloltkartya);
         }
         
     }
 
+    void kartyakTakarit(){
+        jatekter.ellenfel1.kivalasztottKartya = null;
+        jatekter.ellenfel2.kivalasztottKartya = null;
+        jatekter.ellenfel3.kivalasztottKartya = null;
+        jatekter.p.remove(jatekter.jatekoskijeloltkartya);
+    }
+    
     class Mozgato implements ActionListener {
 
         JatekosPanel j;
@@ -289,7 +288,7 @@ public class JatekIranyito {
                 if (j.pozx < j.pozxig) {
                     j.pozx = j.pozxig;
                 }
-                j.pozy += 6;
+                j.pozy += 3;
                 if (j.pozy > j.pozyig) {
                     j.pozy = j.pozyig;
                 }
