@@ -63,14 +63,15 @@ public class JatekIranyito {
             }else{
                 
             }
+
+            jatekter.kartyakFrissit();
+            if (egyszemelyes) {
+                botTipp();
+            } else {
+                //jatekos tipp
+            }
         }else{
             jatekvege(egyszemelyes);
-        }
-        jatekter.kartyakFrissit();
-        if(egyszemelyes){
-            botTipp();
-        }else{
-            //jatekos tipp
         }
     }
     
@@ -232,7 +233,7 @@ public class JatekIranyito {
     }
 
     private void jatekvege(boolean e) {
-        vege = new KijelzoVege("A játék véget ért", FOABLAK_MAG, FOABLAK_SZEL, true ,e);
+        vege = new KijelzoVege("A játék véget ért", FOABLAK_SZEL, FOABLAK_MAG, true ,e);
         vege.setVisible(true);
         jatekter.frame.dispose();
     }
