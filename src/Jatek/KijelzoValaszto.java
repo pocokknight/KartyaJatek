@@ -7,22 +7,27 @@ import static Jatek.Main.*;
 
 public class KijelzoValaszto extends Kijelzo {
 
-    Gomb egyjatekos,tobbjatekos,kilepes;
+    Gomb egyjatekos,tobbjatekos,gyakorlo,kilepes;
     
     public KijelzoValaszto(String cim, int w, int h, boolean kilepos) {
         super(cim, w, h, kilepos);
         
-        egyjatekos = new Gomb("Egyjátékos mód",getSzel()/2,getMag()/10);
+        egyjatekos = new Gomb("Egyjátékos mód",getSzel()/2,getMag()/11);
         egyjatekos.setLocation(getSzel()/2-egyjatekos.getWidth()/2, getMag()/10*4);
         p.add(egyjatekos);
         egyjatekos.addMouseListener(new Listener());
         
-        tobbjatekos = new Gomb("Többjátékos mód",getSzel()/2,getMag()/10);
+        gyakorlo = new Gomb("Gyakorló mód",getSzel()/2,getMag()/11);
+        gyakorlo.setLocation(getSzel()/2-gyakorlo.getWidth()/2, getMag()/10*5);
+        p.add(gyakorlo);
+        gyakorlo.addMouseListener(new Listener());
+        
+        tobbjatekos = new Gomb("Többjátékos mód",getSzel()/2,getMag()/11);
         tobbjatekos.setLocation(getSzel()/2-tobbjatekos.getWidth()/2, getMag()/10*6);
         p.add(tobbjatekos);
         tobbjatekos.addMouseListener(new Listener());
         
-        kilepes = new Gomb("Kilépés",getSzel()/2,getMag()/10);
+        kilepes = new Gomb("Kilépés",getSzel()/2,getMag()/11);
         kilepes.setLocation(getSzel()/2-kilepes.getWidth()/2, getMag()/10*8);
         p.add(kilepes);
         kilepes.addMouseListener(new Listener());
@@ -40,6 +45,10 @@ public class KijelzoValaszto extends Kijelzo {
                 iranyito.oszt();
                 valaszto.frame.dispose();
             }else if(me.getSource() == tobbjatekos){
+                lobby = new KijelzoLobby("Riki-tiki by: Pocok - Többjátékos lobby", FOABLAK_SZEL, FOABLAK_MAG, true);
+                lobby.setVisible(true);
+                valaszto.frame.dispose();   
+            }else if(me.getSource() == gyakorlo){
                 System.out.println("Még nincs kész");
             }else if(me.getSource() == kilepes){
                 System.exit(0);

@@ -9,6 +9,7 @@ import static Jatek.Main.*;
 
 public class KijelzoJatekter extends Kijelzo {
 
+    Gomb kilepes;
     Vector<KartyaPanel> jatekosKartyak;
     KartyaPanel jatekoskijeloltkartya;
     Vector<KartyaLap> asztal;
@@ -21,6 +22,10 @@ public class KijelzoJatekter extends Kijelzo {
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
         rakhat = false;
+        kilepes = new Gomb("Kilépés : nem",getSzel()/10,getMag()/20);
+        kilepes.setLocation(getSzel()/10*8, getMag()/10*9);
+        p.add(kilepes);
+        kilepes.addMouseListener(new Listener());
         jatekospont = new JLabel("Pontod : "+jatekosOsszPont);
         jatekostipp = new JLabel("Utolsó tipped : "+jatekosTipp);
         kiiras = new JLabel("SZÖVEG AMIT MEG KELL NÉZNED!",JLabel.CENTER);
@@ -104,7 +109,12 @@ public class KijelzoJatekter extends Kijelzo {
     
     public class Listener implements MouseListener{
 
-        @Override public void mouseClicked(MouseEvent me) {}
+        @Override public void mouseClicked(MouseEvent me) {
+            if(me.getSource() == kilepes){
+                iranyito.leallit = !iranyito.leallit;
+                kilepes.label.setText("Kilepes : "+(iranyito.leallit ? "igen" : "nem"));
+            }
+        }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}
         @Override public void mouseEntered(MouseEvent me) {}

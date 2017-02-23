@@ -58,13 +58,13 @@ public class JatekIranyito {
                     jatekLap-=2;
                 }
                 if(jatekLap == 0){
-                    System.out.println("Játék vége");
+                    jatekvege(egyszemelyes);
                 }
             }else{
                 
             }
         }else{
-            System.out.println("Játék vége");
+            jatekvege(egyszemelyes);
         }
         jatekter.kartyakFrissit();
         if(egyszemelyes){
@@ -229,6 +229,12 @@ public class JatekIranyito {
         jatekter.ellenfel3.labelfrissit();
         jatekter.ellenfel3.tipp.setText("Tipp : -");
         jatekter.jatekospont.setText("Pontod : "+jatekter.jatekosOsszPont);
+    }
+
+    private void jatekvege(boolean e) {
+        vege = new KijelzoVege("A játék véget ért", FOABLAK_MAG, FOABLAK_SZEL, true ,e);
+        vege.setVisible(true);
+        jatekter.frame.dispose();
     }
 
     class Kiiro implements ActionListener {

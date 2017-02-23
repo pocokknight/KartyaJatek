@@ -16,6 +16,8 @@ public class Main {
     public static KijelzoJatekter jatekter;
     public static KijelzoTippBekero tbk;
     public static JatekIranyito iranyito;
+    public static KijelzoLobby lobby;
+    public static KijelzoVege vege;
     
     Main(){
         //new KijelzoTeszt(1000, 600);
