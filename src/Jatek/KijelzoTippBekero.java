@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static Jatek.Main.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class KijelzoTippBekero extends Kijelzo {
 
@@ -32,37 +34,43 @@ public class KijelzoTippBekero extends Kijelzo {
         p.add(mezo);
         ok.addMouseListener(new Listener());
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        
     }
     
     
     public class Listener implements MouseListener{
 
-        @Override public void mouseClicked(MouseEvent me) {
-            int t;
-            if(hiba != null)hiba.frame.dispose();
-            if(mezo.getValue() == null){
-                hiba = new KijelzoHiba("A mezőben nem szerepel tipp!", FOABLAK_SZEL/3, FOABLAK_MAG/4);
-            }else{
-                try{
-                    jatekter.jatekosTipp = (int)mezo.getValue();
-                    jatekter.jatekostipp.setText("Utolsó tipped : "+jatekter.jatekosTipp);
-                    frame.dispose();
-                }catch(Exception e){
-                    hiba = new KijelzoHiba("A mezőben nem szám szerepel!.", FOABLAK_SZEL/3, FOABLAK_MAG/4);
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            if (me.getSource() == ok) {
+                int t;
+                if (hiba != null) {
+                    hiba.frame.dispose();
                 }
-            }
-            if (iranyito == null) {
-                gyakorlo.lepes();
-                jatekter.jatekosTipp = 1;
-                jatekter.jatekostipp.setText("Utolsó tipped : 1");
-            } else {
-                if (egyszemelyes){
-                    iranyito.botKartyaRakas();
-                }else{
-                    //tobbszemelyes
-                }
-            }
+                if (mezo.getValue() == null) {
+                    hiba = new KijelzoHiba("A mezőben nem szerepel tipp!", FOABLAK_SZEL / 3, FOABLAK_MAG / 4);
+                } else {
+                    try {
 
+                        mezo.commitEdit();
+                        jatekter.jatekosTipp = (int) mezo.getValue();
+                        jatekter.jatekostipp.setText("Utolsó tipped : " + jatekter.jatekosTipp);
+                        frame.dispose();
+                        if (iranyito == null) {
+                            gyakorlo.lepes();
+                            jatekter.jatekosTipp = 1;
+                            jatekter.jatekostipp.setText("Utolsó tipped : 1");
+                        } else if (egyszemelyes) {
+                            iranyito.botKartyaRakas();
+                        } else {
+                            //tobbszemelyes
+                        }
+                    } catch (Exception e) {
+                        hiba = new KijelzoHiba("A mezőben nem megfelelő szám szerepel!.", FOABLAK_SZEL / 3, FOABLAK_MAG / 4);
+                    }
+                }
+            }
         }
         @Override public void mousePressed(MouseEvent me) {}
         @Override public void mouseReleased(MouseEvent me) {}

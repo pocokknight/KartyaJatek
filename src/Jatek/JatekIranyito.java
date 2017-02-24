@@ -198,18 +198,22 @@ public class JatekIranyito {
             case "jatekos":
                 jatekter.jatekosKorPont++;
                 korJatekos = 0;
+                jatekter.labelfrissit();
                 return "Te vitted";
             case "Bot 1":
                 jatekter.ellenfel1.korPontErtek++;
                 korJatekos = 1;
+                jatekter.labelfrissit();
                 return "Bot 1 vitte";
             case "Bot 2":
                 jatekter.ellenfel2.korPontErtek++;
                 korJatekos = 2;
+                jatekter.labelfrissit();
                 return "Bot 2 vitte";
             case "Bot 3":
                 jatekter.ellenfel3.korPontErtek++;
                 korJatekos = 3;
+                jatekter.labelfrissit();
                 return "Bot 3 vitte";
         }
         return "";
@@ -228,6 +232,11 @@ public class JatekIranyito {
         jatekter.ellenfel3.labelfrissit();
         jatekter.ellenfel3.tipp.setText("Tipp : -");
         jatekter.jatekospont.setText("Pontod : "+jatekter.jatekosOsszPont);
+        jatekter.ellenfel1.korPontErtek = 0;
+        jatekter.ellenfel2.korPontErtek = 0;
+        jatekter.ellenfel3.korPontErtek = 0;
+        jatekter.jatekosKorPont = 0;
+        jatekter.labelfrissit();
     }
 
     private void jatekvege(boolean e) {
@@ -289,11 +298,11 @@ public class JatekIranyito {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (j.pozy != j.pozyig) {
-                j.pozx += 4;
+                j.pozx += 8;
                 if (j.pozx < j.pozxig) {
                     j.pozx = j.pozxig;
                 }
-                j.pozy += 3;
+                j.pozy += 6;
                 if (j.pozy > j.pozyig) {
                     j.pozy = j.pozyig;
                 }

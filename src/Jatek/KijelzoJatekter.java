@@ -17,7 +17,7 @@ public class KijelzoJatekter extends Kijelzo {
     int jatekosTipp,jatekosKorPont,jatekosOsszPont;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     Listener listener = new Listener();
-    JLabel jatekospont,jatekostipp,kiiras;
+    JLabel jatekospont,jatekostipp,kiiras,sajatutes;
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
@@ -27,16 +27,21 @@ public class KijelzoJatekter extends Kijelzo {
         p.add(kilepes);
         kilepes.addMouseListener(new Listener());
         jatekospont = new JLabel("Pontod : "+jatekosOsszPont);
-        jatekostipp = new JLabel("Utolsó tipped : "+jatekosTipp);
+        jatekostipp = new JLabel("Utolsó tipped : -");
         kiiras = new JLabel("SZÖVEG AMIT MEG KELL NÉZNED!",JLabel.CENTER);
+        sajatutes = new JLabel("Ütéseid : -");
         jatekospont.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/30);
-        jatekospont.setLocation(FOABLAK_SZEL/10*4,FOABLAK_MAG/20*18);
+        jatekospont.setLocation(FOABLAK_SZEL/10*3,FOABLAK_MAG/20*18);
         jatekospont.setForeground(new Color(nr,ng,nb));
         p.add(jatekospont);
         jatekostipp.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/30);
         jatekostipp.setLocation(FOABLAK_SZEL/10*5,FOABLAK_MAG/20*18);
         jatekostipp.setForeground(new Color(nr,ng,nb));
         p.add(jatekostipp);
+        sajatutes.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/30);
+        sajatutes.setLocation(FOABLAK_SZEL/10*7,FOABLAK_MAG/20*18);
+        sajatutes.setForeground(new Color(nr,ng,nb));
+        p.add(sajatutes);
         kiiras.setSize(FOABLAK_SZEL,FOABLAK_MAG/10);
         kiiras.setLocation(FOABLAK_SZEL/2-kiiras.getWidth()/2,FOABLAK_MAG/2-kiiras.getHeight()/2);
         kiiras.setFont(new Font(kiiras.getFont().getName(),kiiras.getFont().getStyle(),FOABLAK_MAG/10));
@@ -51,6 +56,16 @@ public class KijelzoJatekter extends Kijelzo {
         else tobbjatekos();
     }
 
+    void labelfrissit(){
+        //jatekos is
+        ellenfel1.labelfrissit();
+        ellenfel2.labelfrissit();
+        ellenfel3.labelfrissit();
+        jatekospont.setText("Pontod : "+jatekosOsszPont);
+        sajatutes.setText("Ütéseid : "+jatekosKorPont);
+        jatekostipp.setText("Utolsó tipped : "+jatekosTipp);
+    }
+    
     private void egyjatekos() {
         
         ellenfel1 = new JatekosPanel("Bot 1",FOABLAK_SZEL/10*2,FOABLAK_MAG/5);

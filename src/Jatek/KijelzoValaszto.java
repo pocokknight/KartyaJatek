@@ -42,17 +42,21 @@ public class KijelzoValaszto extends Kijelzo {
                 jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, true);
                 jatekter.setVisible(true);
                 iranyito = new JatekIranyito(true);
+                gyakorlo = null;
                 iranyito.oszt();
                 valaszto.frame.dispose();
             }else if(me.getSource() == tobbjatekos){
                 lobby = new KijelzoLobby("Riki-tiki by: Pocok - Többjátékos lobby", FOABLAK_SZEL, FOABLAK_MAG, true);
                 lobby.setVisible(true);
+                jatekter = null;
+                iranyito = null;
                 valaszto.frame.dispose();   
             }else if(me.getSource() == gyakorlas){
                 jatekter = new KijelzoJatekter("Riki-tiki by: Pocok - Gyakorló mód", FOABLAK_SZEL, FOABLAK_MAG, true);
                 jatekter.setVisible(true);
                 gyakorlo = new KijelzoGyakorlo("Utasítás", FOABLAK_SZEL/6, FOABLAK_MAG);
                 gyakorlo.setVisible(true);
+                iranyito = null;
                 valaszto.frame.dispose();
             }else if(me.getSource() == kilepes){
                 System.exit(0);

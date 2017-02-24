@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class JatekosPanel extends JPanel {
 
-    JLabel nev,pont,tipp;
+    JLabel nev,pont,tipp,korpont;
     int osszPontErtek = 0;
     int korPontErtek = 0;
     int tippertek = 0;
@@ -20,26 +20,32 @@ public class JatekosPanel extends JPanel {
         nev = new JLabel(n);
         pont = new JLabel("Pont: "+osszPontErtek);
         tipp = new JLabel("Tipp: "+tippertek);
+        korpont = new JLabel("Ütések : "+korPontErtek);
         setLayout(null);
         szel = w;
         mag = h;
         nev.setForeground(new Color(nr,ng,nb));
         pont.setForeground(new Color(nr,ng,nb));
         tipp.setForeground(new Color(nr,ng,nb));
+        korpont.setForeground(new Color(nr,ng,nb));
         nev.setSize(w, h/9);
         pont.setSize(w, h/9);
         tipp.setSize(w, h/9);
+        korpont.setSize(w, h/9);
         nev.setLocation(w/10*1, h/9*1);
         pont.setLocation(w/10*1, h/9*2);
         tipp.setLocation(w/10*1, h/9*3);
+        korpont.setLocation(w/10*5, h/9*3);
         add(nev);
         add(pont);
+        add(korpont);
         add(tipp);
     }
     
     void labelfrissit(){
         pont.setText("Pont: "+osszPontErtek);
         tipp.setText("Tipp: "+tippertek);
+        korpont.setText("Ütések : "+korPontErtek);
     }
     
     final int pozxs = 20, pozys = 75;

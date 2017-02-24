@@ -60,7 +60,6 @@ public class BotJatekos {
                 }
             }
         }
-        System.out.println(sorszam);
         return sorszam;
     }
     
