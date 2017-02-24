@@ -19,6 +19,7 @@ public class KijelzoGyakorlo extends Kijelzo {
         "Minden kör kezdetén a játékos folyamatosan növekvő számú kártyát kap első körben egyet, majd innen növekedik addig, amíg a játékosoknak az 52 kártya egyenlően elosztható (4 játékos esetén ez 52/4 = 12 darab kártya) majd visszafelé amíg a kártyák szám 0 -ra nem csökken. Az eredeti szabályoktól eltérően az első kört a játék túlbonyolításának elkerülése végett NEM fordított kártyákkal játszuk.",
         "Ebben a körbe 3 kártyát kaptál. Mint látod a kör elején megjelent egy ablak amelyben meg kell tippelned hány környi kártyát fogsz elütni (egy ilyen kör ha minden játékos tett egy lapot most például ezt 0 és 3 közé kellene állítanod) jelen esetben rendelkezel egy 6 -ossal,10 -essel és egy dámával. Minnél nagyobb a kártyád annál nagyobb az eséllyed az ütésre. Akkor ütsz eggyet ha te raktad a legnagyobb kártyát utoljára vagyis ha van az asztalon egy király azt te ütni tudod ha királyt teszel le, ugyan így más is ütheti királlyal a te királyodat. Mivel ez csak egy gyakorló kör a tippedet automatikusan 1 re állítjuk.",
         "És ezzel elkezdődött a kör, az első kört mindig a játékos kezdi egyszemélyes módban, míg többszemélyes módban ez véletlen szerű. Kérlek kattints a [DÁMA] ra amivel leteszed azt az asztalra.",
+        "Most hogy a többiek is raktak láthatod, hogy Bot 1 egy királyt tett le így ő szerezte meg az ütést. Viszont neked még mindig vinned kell egy kártyát",
         ""
     };
     
@@ -26,6 +27,7 @@ public class KijelzoGyakorlo extends Kijelzo {
         "Osztás",
         "",
         "",
+        "Rendben",
         ""
     };
     
@@ -66,8 +68,13 @@ public class KijelzoGyakorlo extends Kijelzo {
         switch(szovegSzamlalo){
             case 1:
                 osztas();
+                break;
             case 2:
                 jatekter.rakhat = true;
+                break;
+            case 3:
+                System.out.println("asd");
+                break;
         }
     }
 
@@ -96,7 +103,7 @@ public class KijelzoGyakorlo extends Kijelzo {
         jatekter.ellenfel1.kivalasztottKartya = new KartyaLap(Main.vel(0, 3), 11);
         jatekter.ellenfel2.kivalasztottKartya = new KartyaLap(Main.vel(0, 3), Main.vel(0, 9));
         jatekter.ellenfel3.kivalasztottKartya = new KartyaLap(Main.vel(0, 3), Main.vel(0, 9));
-        
+        lepes();
     }
     
     class A implements ActionListener {
