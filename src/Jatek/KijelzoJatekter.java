@@ -131,8 +131,7 @@ public class KijelzoJatekter extends Kijelzo {
                     kilepes.label.setText("Kilepes : " + (iranyito.leallit ? "igen" : "nem"));
                 }
                 if (gyakorlo != null) {
-                    gyakorlo.leallit = !gyakorlo.leallit;
-                    kilepes.label.setText("Kilepes : " + (gyakorlo.leallit ? "igen" : "nem"));
+                    kilepes.label.setText("Kilepes : nem");
                 }
             }
         }

@@ -72,17 +72,47 @@ public class KartyaPanel extends JPanel {
                         }
                     }
                 }else {
+                    KartyaPanel p;
                     switch (gyakorlo.szovegSzamlalo) {
                         case 2:
-                            KartyaPanel p = (KartyaPanel)me.getSource();
+                            p = (KartyaPanel)me.getSource();
                             if(p.lap.ertek == 10){
                                 jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(0);
                                 jatekter.jatekoskijeloltkartya.setAllapot(0);
                                 jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
                                 jatekter.jatekosKartyak.remove(0);
                                 jatekter.rakhat = false;
+                                jatekter.ellenfel1.korPontErtek = 1;
+                                jatekter.labelfrissit();
                                 jatekter.kartyakFrissit();
                                 gyakorlo.korEgy();
+                            }
+                        case 4:
+                            p = (KartyaPanel)me.getSource();
+                            if(p.lap.ertek == 4){
+                                jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(0);
+                                jatekter.jatekoskijeloltkartya.setAllapot(0);
+                                jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
+                                jatekter.jatekosKartyak.remove(0);
+                                jatekter.rakhat = false;
+                                jatekter.kartyakFrissit();
+                                jatekter.ellenfel2.korPontErtek = 1;
+                                jatekter.labelfrissit();
+                                gyakorlo.takarit();
+                                gyakorlo.lepes();
+                            }
+                        case 5:
+                            p = (KartyaPanel)me.getSource();
+                            if(p.lap.ertek == 8){
+                                jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(0);
+                                jatekter.jatekoskijeloltkartya.setAllapot(0);
+                                jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
+                                jatekter.jatekosKartyak.remove(0);
+                                jatekter.rakhat = false;
+                                jatekter.kartyakFrissit();
+                                jatekter.jatekosKorPont = 1;
+                                jatekter.labelfrissit();
+                                gyakorlo.lepes();
                             }
                     }
                 }

@@ -71,6 +71,8 @@ public class KijelzoVege extends Kijelzo {
                 valaszto = new KijelzoValaszto("Kártyajáték - készítette: Horváth Patrik", FOABLAK_SZEL, FOABLAK_MAG, true);
                 valaszto.setVisible(true);
                 vege.frame.dispose();
+                vege = null;
+                iranyito = null;
             }
         }
         @Override public void mousePressed(MouseEvent me) {}
