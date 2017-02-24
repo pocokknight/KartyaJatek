@@ -8,8 +8,8 @@ public class Kijelzo {
 
     JFrame frame;
     MyMainPanel p;
-    
-    Kijelzo(String cim,int w,int h,boolean kilepos){
+
+    Kijelzo(String cim, int w, int h, boolean kilepos) {
         frame = new JFrame(cim);
         frame.setSize(w, h);
         frame.setLocationRelativeTo(null);
@@ -19,26 +19,26 @@ public class Kijelzo {
         frame.setResizable(false);
         p.setLayout(null);
     }
-    
-    public void setVisible(boolean b){
+
+    public void setVisible(boolean b) {
         frame.setVisible(b);
     }
-    
-    public int getSzel(){
+
+    public int getSzel() {
         return frame.getWidth();
     }
-    
-    public int getMag(){
+
+    public int getMag() {
         return frame.getHeight();
     }
 
-    public class MyMainPanel extends JPanel{
+    public class MyMainPanel extends JPanel {
 
         @Override
-    protected void paintComponent(Graphics g) {
-        g.drawImage(Kep.getKep(Kep.class,"paletta.png"), 0, 0, Main.FOABLAK_SZEL,Main.FOABLAK_MAG, null);
+        protected void paintComponent(Graphics g) {
+            g.drawImage(Kep.getKep(Kep.class, "paletta.png"), 0, 0, Main.FOABLAK_SZEL, Main.FOABLAK_MAG, null);
+        }
+
     }
-        
-    }
-    
+
 }

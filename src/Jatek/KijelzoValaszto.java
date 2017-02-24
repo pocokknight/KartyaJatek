@@ -4,13 +4,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static Jatek.Main.*;
+import Kepek.Kep;
 
 public class KijelzoValaszto extends Kijelzo {
 
     Gomb egyjatekos,tobbjatekos,gyakorlas,kilepes;
+    LogoPanel logo;
     
     public KijelzoValaszto(String cim, int w, int h, boolean kilepos) {
         super(cim, w, h, kilepos);
+        
+        logo = new LogoPanel();
+        logo.setSize(160*3, 50*3);
+        logo.setLocation(FOABLAK_SZEL/2-logo.getWidth()/2, FOABLAK_MAG/10);
+        p.add(logo);
         
         egyjatekos = new Gomb("Egyjátékos mód",getSzel()/2,getMag()/11);
         egyjatekos.setLocation(getSzel()/2-egyjatekos.getWidth()/2, getMag()/10*4);
@@ -31,6 +38,15 @@ public class KijelzoValaszto extends Kijelzo {
         kilepes.setLocation(getSzel()/2-kilepes.getWidth()/2, getMag()/10*8);
         p.add(kilepes);
         kilepes.addMouseListener(new Listener());
+        
+    }
+
+    class LogoPanel extends JPanel{
+        
+        @Override
+        protected void paintComponent(Graphics g) {
+            g.drawImage(Kep.getKep(Kep.class, "logo.png"), 0, 0, getWidth(), getHeight(), null);
+        }
         
     }
     
