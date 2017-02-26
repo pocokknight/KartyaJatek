@@ -19,6 +19,7 @@ public class Main {
     public static KijelzoGyakorlo gyakorlo;
     public static KijelzoLobby lobby;
     public static KijelzoVege vege;
+    public static ServerClientKezelo sck;
     
     Main(){
         //new KijelzoTeszt(1000, 600);

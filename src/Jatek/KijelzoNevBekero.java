@@ -35,7 +35,7 @@ public class KijelzoNevBekero extends Kijelzo {
             else{
                 Main.nev = mezo.getText();
                 Main.nbk.frame.dispose();
-                Main.valaszto = new KijelzoValaszto("Kártyajáték - készítette: Horváth Patrik", FOABLAK_SZEL, FOABLAK_MAG, true);
+                Main.valaszto = new KijelzoValaszto("Riki - Tiki készítette: Horváth Patrik", FOABLAK_SZEL, FOABLAK_MAG, true);
                 Main.valaszto.setVisible(true);
             }
         }
