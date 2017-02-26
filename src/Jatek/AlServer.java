@@ -34,7 +34,6 @@ public class AlServer extends Thread implements Comparable{
     
     public void kuld(String sz){
         try{
-            System.out.println("adat küldése:");
             out.writeUTF(sz);
         }catch(Exception e){System.out.println("alserver 2");}
     }

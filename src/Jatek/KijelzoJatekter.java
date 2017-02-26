@@ -13,7 +13,7 @@ public class KijelzoJatekter extends Kijelzo {
     Vector<KartyaPanel> jatekosKartyak;
     KartyaPanel jatekoskijeloltkartya;
     Vector<KartyaLap> asztal;
-    boolean rakhat;
+    boolean rakhat,egyjatekos;
     int jatekosTipp,jatekosKorPont,jatekosOsszPont;
     JatekosPanel ellenfel1,ellenfel2,ellenfel3;
     Listener listener = new Listener();
@@ -21,6 +21,7 @@ public class KijelzoJatekter extends Kijelzo {
     
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
+        this.egyjatekos = egyjatekos;
         rakhat = false;
         kilepes = new Gomb("Kilépés : nem",getSzel()/10,getMag()/20);
         kilepes.setLocation(getSzel()/10*8, getMag()/10*9);
@@ -88,7 +89,33 @@ public class KijelzoJatekter extends Kijelzo {
     }
 
     private void tobbjatekos() {
-        System.out.println("Még nem támogatott.");
+        int lobbyszam = 0;
+        if(lobby.nevek.size()>1){
+            if(lobby.nevek.get(lobbyszam).s.equals(Main.nev)) lobbyszam++;
+            System.out.println(lobby.nevek.get(lobbyszam)+"  "+lobbyszam);
+            ellenfel1 = new JatekosPanel(lobby.nevek.get(lobbyszam).s,FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
+            ellenfel1.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
+            ellenfel1.setLocation(FOABLAK_SZEL/10*1,FOABLAK_MAG/30);
+            p.add(ellenfel1);
+            lobbyszam++;
+        }
+        if(lobby.nevek.size()>2){
+            if(lobby.nevek.get(lobbyszam).s.equals(Main.nev)) lobbyszam++;
+            ellenfel2 = new JatekosPanel(lobby.nevek.get(lobbyszam).s,FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
+            ellenfel2.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
+            ellenfel2.setLocation(FOABLAK_SZEL/10*4,FOABLAK_MAG/30);
+            p.add(ellenfel2);
+            lobbyszam++;
+        }
+        if(lobby.nevek.size()>3){
+            if(lobby.nevek.get(lobbyszam).s.equals(Main.nev)) lobbyszam++;
+            ellenfel3 = new JatekosPanel(lobby.nevek.get(lobbyszam).s,FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
+            ellenfel3.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
+            ellenfel3.setLocation(FOABLAK_SZEL/10*7,FOABLAK_MAG/30);
+            p.add(ellenfel3);
+        }
+        
+        kartyakFrissit();
     }
     
     
@@ -113,13 +140,26 @@ public class KijelzoJatekter extends Kijelzo {
         }
         p.repaint();
         
-        ellenfel1.tipp.setText("Tipp: "+ellenfel1.tippertek);
-        ellenfel2.tipp.setText("Tipp: "+ellenfel2.tippertek);
-        ellenfel3.tipp.setText("Tipp: "+ellenfel3.tippertek);
-                        
-        ellenfel1.pont.setText("Pont: "+ellenfel1.osszPontErtek);               
-        ellenfel2.pont.setText("Pont: "+ellenfel2.osszPontErtek);               
-        ellenfel3.pont.setText("Pont: "+ellenfel3.osszPontErtek);               
+        if(egyjatekos){
+            ellenfel1.tipp.setText("Tipp: "+ellenfel1.tippertek);
+            ellenfel2.tipp.setText("Tipp: "+ellenfel2.tippertek);
+            ellenfel3.tipp.setText("Tipp: "+ellenfel3.tippertek);
+
+            ellenfel1.pont.setText("Pont: "+ellenfel1.osszPontErtek);               
+            ellenfel2.pont.setText("Pont: "+ellenfel2.osszPontErtek);               
+            ellenfel3.pont.setText("Pont: "+ellenfel3.osszPontErtek);  
+        }else{
+            try{
+                
+            ellenfel1.tipp.setText("Tipp: "+ellenfel1.tippertek);
+            ellenfel1.pont.setText("Pont: "+ellenfel1.osszPontErtek); 
+            ellenfel2.tipp.setText("Tipp: "+ellenfel2.tippertek);
+            ellenfel2.pont.setText("Pont: "+ellenfel2.osszPontErtek); 
+            ellenfel3.tipp.setText("Tipp: "+ellenfel3.tippertek);
+            ellenfel3.pont.setText("Pont: "+ellenfel3.osszPontErtek); 
+                            
+            }catch(Exception e){}
+        }
     }
     
     public class Listener implements MouseListener{

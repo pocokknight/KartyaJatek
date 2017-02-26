@@ -27,8 +27,13 @@ public class JatekIranyito {
         if(e){
             letszam = 4;
         }else{
-            
+            letszam = lobby.nevek.size();
         }
+        
+        lobby.frame.dispose();
+        lobby = null;
+        
+        System.out.println("letszam: "+letszam);
     }
 
     public void oszt() {

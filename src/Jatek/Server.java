@@ -1,5 +1,6 @@
 package Jatek;
 
+import static Jatek.Main.lobby;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
@@ -17,6 +18,8 @@ public class Server implements Runnable{
     Server(int port){
         try{
             ss = new ServerSocket(port);
+            lobby.server.label.setText("Szerver indítása");
+            lobby.vanserver = true;
         }catch(Exception e){System.out.println("server 1");}
     }
     

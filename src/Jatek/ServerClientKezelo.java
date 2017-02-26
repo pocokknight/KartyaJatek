@@ -1,6 +1,6 @@
 package Jatek;
 
-import static Jatek.Main.lobby;
+import static Jatek.Main.*;
 
 class ServerClientKezelo {
 
@@ -77,6 +77,12 @@ class ServerClientKezelo {
             case "uzenet":
                 lobby.chat.setText(lobby.chat.getText()+"\n"+t[1]);
                 break;
+            case "kezdes":
+                jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, false);
+                jatekter.setVisible(true);
+                lobby.frame.dispose();
+                lobby = null;
+                break;
         }
     }
 
@@ -104,6 +110,14 @@ class ServerClientKezelo {
             serverKapottuzenet(Main.nev+" : "+s);
         }else if(C != null){
             C.kuld("uzenet@"+Main.nev+" : "+s);
+        }
+    }
+
+    void uzenetMindenkinek(String s) {
+        if(S != null){
+            for (int i = 0; i < S.alserverek.size(); i++) {
+                S.alserverek.get(i).kuld(s);
+            }
         }
     }
 }

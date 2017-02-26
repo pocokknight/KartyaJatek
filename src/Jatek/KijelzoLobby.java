@@ -14,9 +14,12 @@ public class KijelzoLobby extends Kijelzo {
     JTextField chatbe;
     KijelzoSCBekero bekero;
     Vector<StringBoolean> nevek;
-
+    boolean vanserver;
+    
     public KijelzoLobby(String cim, int w, int h, boolean kilepos) {
         super(cim, w, h, kilepos);
+        
+        vanserver = false;
         
         chat = new JTextArea("Hozz létre egy szervert vagy csatlakozz egyhez.");
         chatscroll = new JScrollPane(chat);
@@ -97,8 +100,15 @@ public class KijelzoLobby extends Kijelzo {
                 valaszto = new KijelzoValaszto("Kártyajáték - készítette: Horváth Patrik", FOABLAK_SZEL, FOABLAK_MAG, true);
                 valaszto.setVisible(true);
             }else if(me.getSource() == server){
-                sck = new ServerClientKezelo();
-                bekero = new KijelzoSCBekero("Kérlek add meg a szerver portját:", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, true);
+                if(!vanserver){
+                    sck = new ServerClientKezelo();
+                    bekero = new KijelzoSCBekero("Kérlek add meg a szerver portját:", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, true);
+                }else{
+                    sck.uzenetMindenkinek("kezdes");
+                    jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, false);
+                    jatekter.setVisible(true);
+                    iranyito = new JatekIranyito(false);
+                }
             }else if(me.getSource() == client){
                 sck = new ServerClientKezelo();
                 bekero = new KijelzoSCBekero("Kérlek add meg a szerver IP címét és portját : -al elválasztva", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, false);

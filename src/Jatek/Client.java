@@ -1,5 +1,6 @@
 package Jatek;
 
+import static Jatek.Main.lobby;
 import static Jatek.Main.sck;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -20,6 +21,7 @@ public class Client implements Runnable{
             if(s.isConnected()){
                 open();
             }
+            lobby.server.label.setText("Szerver hosztolása");
         }catch(Exception e){System.out.println("client 1");}
     }
     
