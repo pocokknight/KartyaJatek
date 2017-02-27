@@ -68,6 +68,25 @@ class ServerClientKezelo {
                 jatekter.labelfrissit();
                 tippszamlalo();
                 break;
+            case "kartyatrakott":
+                uzenetMindenkinek(s);
+                try{
+                    if(jatekter.ellenfel1.nev.getText().equals(t[1])){
+                        jatekter.ellenfel1.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel1.kartyak.remove(0);
+                    }
+                    else if(jatekter.ellenfel2.nev.getText().equals(t[1])){
+                        jatekter.ellenfel2.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel2.kartyak.remove(0);
+                    }
+                    else if(jatekter.ellenfel3.nev.getText().equals(t[1])){
+                        jatekter.ellenfel3.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel3.kartyak.remove(0);
+                    }
+                }catch(Exception e){}
+                jatekter.kartyakFrissit();
+                iranyito.tobbjatekosKartyaRakas();
+                break;
         }
     }
     
@@ -130,6 +149,76 @@ class ServerClientKezelo {
                     tbk = null;
                     jatekter.jatekosTipp = 0;
                     jatekter.labelfrissit();
+                }
+                break;
+            case "kartyatrakott":
+                try{
+                    if(jatekter.ellenfel1.nev.getText().equals(t[1])){
+                        jatekter.ellenfel1.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel1.kartyak.remove(0);
+                    }
+                    else if(jatekter.ellenfel2.nev.getText().equals(t[1])){
+                        jatekter.ellenfel2.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel2.kartyak.remove(0);
+                    }
+                    else if(jatekter.ellenfel3.nev.getText().equals(t[1])){
+                        jatekter.ellenfel3.kivalasztottKartya = new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3]));
+                        jatekter.ellenfel3.kartyak.remove(0);
+                    }
+                }catch(Exception e){}
+                jatekter.kartyakFrissit();
+                break;
+            case "kartyatfograkni":
+                if(t[1].equals(Main.nev)){
+                    jatekter.rakhat = true;
+                    jatekter.nagyszovegkiir("Te következel!");
+                }
+                break;
+            case "utottegyet":
+                if(t[1].equals(Main.nev)){
+                    jatekter.nagyszovegkiir("Te vitted.");
+                    jatekter.jatekosKorPont++;
+                }else{
+                    jatekter.nagyszovegkiir(t[1]+" vitte.");
+                    try{
+                    if(jatekter.ellenfel1.nev.getText().equals(t[1])){
+                        jatekter.ellenfel1.korPontErtek++;
+                    }
+                    else if(jatekter.ellenfel2.nev.getText().equals(t[1])){
+                        jatekter.ellenfel2.korPontErtek++;
+                    }
+                    else if(jatekter.ellenfel3.nev.getText().equals(t[1])){
+                        jatekter.ellenfel3.korPontErtek++;
+                    }
+                }catch(Exception e){}
+                }
+                jatekter.labelfrissit();
+                jatekter.kartyakTakarit();
+                break;
+            case "mindentfrissit":
+                for (int i = 1; i < t.length; i++) {
+                    String[] t2 = t[i].split("#");
+                    try{
+                    if(Main.nev.equals(t2[0])){
+                        jatekter.jatekosTipp = 0;
+                        jatekter.jatekosKorPont = 0;
+                        jatekter.jatekosOsszPont = Integer.parseInt(t2[1]);
+                    }else if(jatekter.ellenfel1.nev.getText().equals(t2[0])){
+                        jatekter.ellenfel1.tippertek = 0;
+                        jatekter.ellenfel1.korPontErtek = 0;
+                        jatekter.ellenfel1.osszPontErtek = Integer.parseInt(t2[1]);
+                    }
+                    else if(jatekter.ellenfel2.nev.getText().equals(t2[0])){
+                        jatekter.ellenfel2.tippertek = 0;
+                        jatekter.ellenfel2.korPontErtek = 0;
+                        jatekter.ellenfel2.osszPontErtek = Integer.parseInt(t2[1]);
+                    }
+                    else if(jatekter.ellenfel3.nev.getText().equals(t2[0])){
+                        jatekter.ellenfel3.tippertek = 0;
+                        jatekter.ellenfel3.korPontErtek = 0;
+                        jatekter.ellenfel3.osszPontErtek = Integer.parseInt(t2[1]);
+                    }
+                    }catch(Exception e){}
                 }
                 break;
         }
@@ -199,15 +288,50 @@ class ServerClientKezelo {
     int tippeksorszama = 0;
     
     void tippszamlalo(){
-        tippeksorszama++;
-        if(tippeksorszama == iranyito.letszam){
-            tippvege();
-            tippeksorszama = 0;
+        System.out.println(tippeksorszama);
+        if(S != null){
+            tippeksorszama++;
+            if(tippeksorszama == iranyito.letszam){
+                tippvege();
+                tippeksorszama = 0;
+            }
         }
     }
 
     void tippvege(){
-        
+        if(S != null){
+            tippelestimer.stop();
+            tippelestimer = null;
+            iranyito.tobbjatekosKartyaRakas();
+        }
+    }
+
+    void kartyarakas(int fajta, int ertek) {
+        if(S != null){
+            uzenetMindenkinek("kartyatrakott@"+Main.nev+"@"+fajta+"@"+ertek);
+            iranyito.tobbjatekosKartyaRakas();
+        }else{
+            C.kuld("kartyatrakott@"+Main.nev+"@"+fajta+"@"+ertek);
+        }
+    }
+
+    void vitte(String s) {
+        if(S != null){
+            uzenetMindenkinek("utottegyet@"+s);
+        }
+    }
+
+    void mindenfrissit() {
+        if(S != null){
+            String s = "mindentfrissit";
+            try{
+                s+= "@"+Main.nev+"#"+jatekter.jatekosOsszPont;
+                s+= "@"+jatekter.ellenfel1.nev.getText()+"#"+jatekter.ellenfel1.osszPontErtek;
+                s+= "@"+jatekter.ellenfel2.nev.getText()+"#"+jatekter.ellenfel2.osszPontErtek;
+                s+= "@"+jatekter.ellenfel3.nev.getText()+"#"+jatekter.ellenfel3.osszPontErtek;
+            }catch(Exception e){}
+            uzenetMindenkinek(s);
+        }
     }
     
     class TippListener implements ActionListener {
@@ -216,6 +340,12 @@ class ServerClientKezelo {
         public void actionPerformed(ActionEvent ae) {
             tippelestimer.stop();
             sck.uzenetMindenkinek("tippvege");
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                    jatekter.jatekosTipp = 0;
+                    jatekter.labelfrissit();
+                }
             tippvege();
         }
 

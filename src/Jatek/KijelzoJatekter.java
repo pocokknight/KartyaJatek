@@ -123,6 +123,15 @@ public class KijelzoJatekter extends Kijelzo {
     public void addKartya(KartyaLap k){
         jatekosKartyak.add(new KartyaPanel(k, 0, 2));
     }
+
+    void kartyakTakarit(){
+        try{
+        p.remove(jatekter.jatekoskijeloltkartya);
+        ellenfel1.kivalasztottKartya = null;
+        ellenfel2.kivalasztottKartya = null;
+        ellenfel3.kivalasztottKartya = null;
+        }catch(Exception e){}
+    }
     
     public void kartyakFrissit(){
         for (int i = 0; i < jatekosKartyak.size(); i++) {
@@ -161,6 +170,25 @@ public class KijelzoJatekter extends Kijelzo {
                             
             }catch(Exception e){}
         }
+    }
+    
+    Timer szovegtimer;
+    
+    void nagyszovegkiir(String s){
+        szovegtimer = new Timer(1500, new SzovegTimer());
+        szovegtimer.start();
+        kiiras.setText(s);
+        kiiras.setVisible(true);
+    }
+
+     class SzovegTimer implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            szovegtimer.stop();
+            kiiras.setVisible(false);
+        }
+
     }
     
     public class Listener implements MouseListener{

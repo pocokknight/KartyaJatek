@@ -57,7 +57,7 @@ public class KartyaPanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent me) {
             if (jatekter.rakhat) {
-                if (iranyito != null) {
+                if (iranyito != null && sck == null) {
                     for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
                         if (jatekter.jatekosKartyak.get(i).equals(me.getSource())) {
                             jatekter.jatekosKartyak.get(i).lap.rakta = "jatekos";
@@ -71,7 +71,20 @@ public class KartyaPanel extends JPanel {
                             iranyito.botKartyaRakas();
                         }
                     }
-                } else {
+                }else if(sck != null){
+                    for (int i = 0; i < jatekter.jatekosKartyak.size(); i++) {
+                        if (jatekter.jatekosKartyak.get(i).equals(me.getSource())) {
+                            jatekter.jatekoskijeloltkartya = jatekter.jatekosKartyak.get(i);
+                            jatekter.jatekoskijeloltkartya.setAllapot(0);
+                            jatekter.jatekoskijeloltkartya.setLocation(FOABLAK_SZEL / 2 - jatekter.jatekoskijeloltkartya.getWidth() / 2, FOABLAK_MAG / 2);
+                            jatekter.jatekosKartyak.remove(i);
+                            jatekter.rakhat = false;
+                            jatekter.kartyakFrissit();
+                            sck.kartyarakas(jatekter.jatekoskijeloltkartya.lap.fajta,jatekter.jatekoskijeloltkartya.lap.ertek);
+                            break;
+                        }
+                    }
+                }else{
                     KartyaPanel p;
                     switch (gyakorlo.szovegSzamlalo) {
                         case 2:
