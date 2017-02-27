@@ -32,7 +32,7 @@ public class Client implements Runnable{
                 String uz = in.readUTF();
                 szoveg = uz;
                 sck.ClientnekUzenet(uz);
-            }catch(Exception e){System.out.println("client 2");}
+            }catch(Exception e){System.out.println("client 2");System.out.println(e);}
         }
     }
 

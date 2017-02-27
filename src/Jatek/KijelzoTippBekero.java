@@ -52,22 +52,22 @@ public class KijelzoTippBekero extends Kijelzo {
                     hiba = new KijelzoHiba("A mezőben nem szerepel tipp!", FOABLAK_SZEL / 3, FOABLAK_MAG / 4);
                 } else {
                     try {
-
                         mezo.commitEdit();
                         jatekter.jatekosTipp = (int) mezo.getValue();
                         jatekter.jatekostipp.setText("Utolsó tipped : " + jatekter.jatekosTipp);
-                        frame.dispose();
-                        if (iranyito == null) {
+                        tbk.frame.dispose();
+                        tbk = null;
+                        if (iranyito == null && sck == null) {
                             gyakorlo.lepes();
                             jatekter.jatekosTipp = 1;
                             jatekter.jatekostipp.setText("Utolsó tipped : 1");
                         } else if (egyszemelyes) {
                             iranyito.botKartyaRakas();
                         } else {
-                            //tobbszemelyes
+                            sck.tippelek();
                         }
                     } catch (Exception e) {
-                        hiba = new KijelzoHiba("A mezőben nem megfelelő szám szerepel!.", FOABLAK_SZEL / 3, FOABLAK_MAG / 4);
+                        hiba = new KijelzoHiba("A mezőben nem megfelelő szám szerepel!", FOABLAK_SZEL / 3, FOABLAK_MAG / 4);
                     }
                 }
             }

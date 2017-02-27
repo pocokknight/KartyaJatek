@@ -1,6 +1,9 @@
 package Jatek;
 
 import static Jatek.Main.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 class ServerClientKezelo {
 
@@ -55,6 +58,16 @@ class ServerClientKezelo {
             case "uzenet":
                 serverKapottuzenet(t[1]);
                 break;
+            case "jatekostipp":
+                uzenetMindenkinek("tippelt@"+t[1]+"@"+t[2]);
+                try{
+                    if(jatekter.ellenfel1.nev.getText().equals(t[1])) jatekter.ellenfel1.tippertek = Integer.parseInt(t[2]);
+                    else if(jatekter.ellenfel2.nev.getText().equals(t[1])) jatekter.ellenfel2.tippertek = Integer.parseInt(t[2]);
+                    else if(jatekter.ellenfel3.nev.getText().equals(t[1])) jatekter.ellenfel3.tippertek = Integer.parseInt(t[2]);
+                }catch(Exception e){}
+                jatekter.labelfrissit();
+                tippszamlalo();
+                break;
         }
     }
     
@@ -82,6 +95,42 @@ class ServerClientKezelo {
                 jatekter.setVisible(true);
                 lobby.frame.dispose();
                 lobby = null;
+                break;
+            case "ujkartya":
+                if(t[1].equals(Main.nev)){
+                    jatekter.jatekosKartyak.add(new KartyaPanel(new KartyaLap(Integer.parseInt(t[2]), Integer.parseInt(t[3])), 0, 2));
+                    try{
+                        jatekter.ellenfel1.kartyak.add(new KartyaLap(0, 0));
+                        jatekter.ellenfel2.kartyak.add(new KartyaLap(0, 0));
+                        jatekter.ellenfel3.kartyak.add(new KartyaLap(0, 0));
+                    }catch(Exception e){}
+                    jatekter.kartyakFrissit();
+                }
+                break;
+            case "tippetkerek":
+                tbk = new KijelzoTippBekero("Kérem adja meg a tippjét 30 mp alatt.", FOABLAK_SZEL/3, FOABLAK_MAG/4, false , false);
+                tbk.setVisible(true);
+                try{
+                    jatekter.ellenfel1.tippertek = 0;
+                    jatekter.ellenfel2.tippertek = 0;
+                    jatekter.ellenfel3.tippertek = 0;
+                }catch(Exception e){}
+                break;
+            case "tippelt":
+                try{
+                    if(jatekter.ellenfel1.nev.getText().equals(t[1])) jatekter.ellenfel1.tippertek = Integer.parseInt(t[2]);
+                    else if(jatekter.ellenfel2.nev.getText().equals(t[1])) jatekter.ellenfel2.tippertek = Integer.parseInt(t[2]);
+                    else if(jatekter.ellenfel3.nev.getText().equals(t[1])) jatekter.ellenfel3.tippertek = Integer.parseInt(t[2]);
+                }catch(Exception e){}
+                jatekter.labelfrissit();
+                break;
+            case "tippvege":
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                    jatekter.jatekosTipp = 0;
+                    jatekter.labelfrissit();
+                }
                 break;
         }
     }
@@ -119,5 +168,56 @@ class ServerClientKezelo {
                 S.alserverek.get(i).kuld(s);
             }
         }
+    }
+    
+    Timer tippelestimer;
+
+    void tippeles() {
+        if(S != null){
+            tippelestimer = new Timer(30000,new TippListener());
+            tippelestimer.start();
+            try{
+                jatekter.ellenfel1.tippertek = 0;
+                jatekter.ellenfel2.tippertek = 0;
+                jatekter.ellenfel3.tippertek = 0;
+            }catch(Exception e){}
+            uzenetMindenkinek("tippetkerek");
+            tbk = new KijelzoTippBekero("Kérem adja meg a tippjét 30 mp alatt.", FOABLAK_SZEL/3, FOABLAK_MAG/4, false , false);
+            tbk.setVisible(true);
+        }
+    }
+
+    void tippelek() {
+        if(C != null){
+            C.kuld("jatekostipp@"+Main.nev+"@"+jatekter.jatekosTipp);
+        }else{
+            uzenetMindenkinek("tippelt@"+Main.nev+"@"+jatekter.jatekosTipp);
+            tippszamlalo();
+        }
+    }
+    
+    int tippeksorszama = 0;
+    
+    void tippszamlalo(){
+        tippeksorszama++;
+        if(tippeksorszama == iranyito.letszam){
+            tippvege();
+            tippeksorszama = 0;
+        }
+    }
+
+    void tippvege(){
+        
+    }
+    
+    class TippListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            tippelestimer.stop();
+            sck.uzenetMindenkinek("tippvege");
+            tippvege();
+        }
+
     }
 }

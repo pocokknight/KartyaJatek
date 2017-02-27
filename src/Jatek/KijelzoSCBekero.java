@@ -20,6 +20,7 @@ public class KijelzoSCBekero extends Kijelzo {
         ok.setLocation(getSzel() / 2 - ok.getWidth() / 2, getMag() / 2);
         p.add(ok);
         mezo = new JTextField();
+        mezo.setText(server ? "7777" : "localhost:7777");
         mezo.setForeground(new Color(nr - szinkul, ng - szinkul, nb - szinkul));
         mezo.setSize(getSzel() / 4 * 3, getMag() / 5);
         mezo.setLocation(getSzel() / 2 - mezo.getWidth() / 2, getMag() / 5);

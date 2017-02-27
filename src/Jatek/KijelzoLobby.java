@@ -104,12 +104,15 @@ public class KijelzoLobby extends Kijelzo {
                     sck = new ServerClientKezelo();
                     bekero = new KijelzoSCBekero("Kérlek add meg a szerver portját:", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, true);
                 }else{
+                    System.out.println("server");
                     sck.uzenetMindenkinek("kezdes");
                     jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, false);
                     jatekter.setVisible(true);
                     iranyito = new JatekIranyito(false);
+                    iranyito.oszt();
                 }
             }else if(me.getSource() == client){
+                System.out.println("client");
                 sck = new ServerClientKezelo();
                 bekero = new KijelzoSCBekero("Kérlek add meg a szerver IP címét és portját : -al elválasztva", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, false);
             }

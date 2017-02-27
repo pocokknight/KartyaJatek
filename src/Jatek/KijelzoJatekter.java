@@ -58,13 +58,15 @@ public class KijelzoJatekter extends Kijelzo {
     }
 
     void labelfrissit(){
-        //jatekos is
-        ellenfel1.labelfrissit();
-        ellenfel2.labelfrissit();
-        ellenfel3.labelfrissit();
         jatekospont.setText("Pontod : "+jatekosOsszPont);
         sajatutes.setText("Ütéseid : "+jatekosKorPont);
         jatekostipp.setText("Utolsó tipped : "+jatekosTipp);
+        try{
+        ellenfel1.labelfrissit();
+        ellenfel2.labelfrissit();
+        ellenfel3.labelfrissit();
+        }catch(Exception e){}
+        jatekter.p.repaint();
     }
     
     private void egyjatekos() {
@@ -92,7 +94,6 @@ public class KijelzoJatekter extends Kijelzo {
         int lobbyszam = 0;
         if(lobby.nevek.size()>1){
             if(lobby.nevek.get(lobbyszam).s.equals(Main.nev)) lobbyszam++;
-            System.out.println(lobby.nevek.get(lobbyszam)+"  "+lobbyszam);
             ellenfel1 = new JatekosPanel(lobby.nevek.get(lobbyszam).s,FOABLAK_SZEL/10*2,FOABLAK_MAG/5);
             ellenfel1.setSize(FOABLAK_SZEL/10*2,FOABLAK_MAG/2);
             ellenfel1.setLocation(FOABLAK_SZEL/10*1,FOABLAK_MAG/30);

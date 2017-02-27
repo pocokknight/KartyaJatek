@@ -28,12 +28,9 @@ public class JatekIranyito {
             letszam = 4;
         }else{
             letszam = lobby.nevek.size();
+            lobby.frame.dispose();
+            lobby = null;
         }
-        
-        lobby.frame.dispose();
-        lobby = null;
-        
-        System.out.println("letszam: "+letszam);
     }
 
     public void oszt() {
@@ -66,14 +63,43 @@ public class JatekIranyito {
                     jatekvege(egyszemelyes);
                 }
             }else{
-                
+                for (int i = 0; i < jatekLap; i++) {
+                    try{
+                        KartyaPanel kp = new KartyaPanel(pakli.get(0), 0, 2);
+                        jatekter.jatekosKartyak.add(kp);
+                        kp.addMouseListener(jatekter.listener);
+                        pakli.remove(0);
+                        jatekter.ellenfel1.kartyak.add(pakli.get(0));
+                        sck.uzenetMindenkinek("ujkartya@"+jatekter.ellenfel1.nev.getText()+"@"+pakli.get(0).fajta+"@"+pakli.get(0).ertek);
+                        pakli.remove(0);
+                        jatekter.ellenfel2.kartyak.add(pakli.get(0));
+                        sck.uzenetMindenkinek("ujkartya@"+jatekter.ellenfel2.nev.getText()+"@"+pakli.get(0).fajta+"@"+pakli.get(0).ertek);
+                        pakli.remove(0);
+                        jatekter.ellenfel3.kartyak.add(pakli.get(0));
+                        sck.uzenetMindenkinek("ujkartya@"+jatekter.ellenfel3.nev.getText()+"@"+pakli.get(0).fajta+"@"+pakli.get(0).ertek);
+                        pakli.remove(0);
+                    }catch(Exception e){}
+                }
+                if(kartyaszamno){
+                    jatekLap++;
+                }else{
+                    jatekLap--;
+                }
+                pakli = ujPakli();
+                if(pakli.size()/letszam < jatekLap && kartyaszamno){
+                    kartyaszamno = false;
+                    jatekLap-=2;
+                }
+                if(jatekLap == 0){
+                    jatekvege(egyszemelyes);
+                }
             }
 
             jatekter.kartyakFrissit();
             if (egyszemelyes) {
                 botTipp();
             } else {
-                //jatekos tipp
+                tobbjatekosTipp();
             }
         }else{
             jatekvege(egyszemelyes);
@@ -248,6 +274,10 @@ public class JatekIranyito {
         vege = new KijelzoVege("A játék véget ért", FOABLAK_SZEL, FOABLAK_MAG, true ,e);
         vege.setVisible(true);
         jatekter.frame.dispose();
+    }
+
+    private void tobbjatekosTipp() {
+        sck.tippeles();
     }
 
     class Kiiro implements ActionListener {
