@@ -16,8 +16,10 @@ public class AlServer extends Thread implements Comparable{
     private DataInputStream in; 
     public boolean fut = false;
     String servernev;
+    boolean leakarallni;
     
     AlServer(Socket S,int ID){
+        leakarallni = false;
         try{
             s = S;
             id = ID;
@@ -60,6 +62,8 @@ public class AlServer extends Thread implements Comparable{
                     kuld("ujnev@"+servernev);
                     lobby.nevekfrissit();
                     sck.nevekfrissit();
+                }else if(uz.equals("leallvalt")){
+                    leakarallni = !leakarallni;
                 }else{
                     sck.ServernekUzenet(uz);
                 }

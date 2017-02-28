@@ -12,10 +12,12 @@ class ServerClientKezelo {
     Server S = null;
     Client C = null;
     int tippek = 0;
+    boolean leallit;
 
     void ujServer(int i) {
         serverki();
         clientki();
+        leallit = false;
         S = new Server(i);
         futtathato = S;
         szal = new Thread(futtathato);
@@ -25,6 +27,7 @@ class ServerClientKezelo {
     void ujClient(String s) {
         serverki();
         clientki();
+        leallit = false;
         String[] t = s.split(":");
         C = new Client(t[0], Integer.parseInt(t[1]));
         futtathato = C;
@@ -86,6 +89,15 @@ class ServerClientKezelo {
                 }catch(Exception e){}
                 jatekter.kartyakFrissit();
                 iranyito.tobbjatekosKartyaRakas();
+                break;
+            case "kilepek":
+                uzenetMindenkinek("jatekvege");
+                vege = new KijelzoVege("A játék véget ért!", FOABLAK_SZEL, FOABLAK_MAG, true, false);
+                vege.setVisible(true);
+                jatekter.frame.dispose();
+                jatekter = null;
+                sck.leallitas();
+                sck = null;
                 break;
         }
     }
@@ -221,6 +233,14 @@ class ServerClientKezelo {
                     }catch(Exception e){}
                 }
                 break;
+            case "jatekvege":
+                vege = new KijelzoVege("A játék véget ért!", FOABLAK_SZEL, FOABLAK_MAG, true, false);
+                vege.setVisible(true);
+                jatekter.frame.dispose();
+                jatekter = null;
+                sck.leallitas();
+                sck = null;
+                break;
         }
     }
 
@@ -331,6 +351,12 @@ class ServerClientKezelo {
                 s+= "@"+jatekter.ellenfel3.nev.getText()+"#"+jatekter.ellenfel3.osszPontErtek;
             }catch(Exception e){}
             uzenetMindenkinek(s);
+        }
+    }
+
+    void leakarallitani() {
+        if(C != null){
+            C.kuld("leallvalt");
         }
     }
     
