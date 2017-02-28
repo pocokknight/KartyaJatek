@@ -1,7 +1,6 @@
 package Jatek;
 
-import static Jatek.Main.lobby;
-import static Jatek.Main.sck;
+import static Jatek.Main.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -32,7 +31,17 @@ public class Client implements Runnable{
                 String uz = in.readUTF();
                 szoveg = uz;
                 sck.ClientnekUzenet(uz);
-            }catch(Exception e){System.out.println("client 2");System.out.println(e);}
+            }catch(Exception e){
+                vege = new KijelzoVege("A játék véget ért! A server bezárult.", FOABLAK_SZEL, FOABLAK_MAG, true, false);
+                vege.setVisible(true);
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                }
+                jatekter.frame.dispose();
+                jatekter = null;
+                sck.leallitas();
+                sck = null;}
         }
     }
 

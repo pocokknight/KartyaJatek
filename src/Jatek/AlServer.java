@@ -1,7 +1,6 @@
 package Jatek;
 
-import static Jatek.Main.lobby;
-import static Jatek.Main.sck;
+import static Jatek.Main.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -62,12 +61,20 @@ public class AlServer extends Thread implements Comparable{
                     kuld("ujnev@"+servernev);
                     lobby.nevekfrissit();
                     sck.nevekfrissit();
-                }else if(uz.equals("leallvalt")){
-                    leakarallni = !leakarallni;
                 }else{
                     sck.ServernekUzenet(uz);
                 }
-            }catch(Exception e){System.out.println("alserver 3");}
+            }catch(Exception e){
+                vege = new KijelzoVege("A játék véget ért!", FOABLAK_SZEL, FOABLAK_MAG, true, false);
+                vege.setVisible(true);
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                }
+                sck.uzenetMindenkinek("jatekvege");
+                sck.leallitas();
+                sck = null;
+            }
         }
     }
     

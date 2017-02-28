@@ -59,42 +59,58 @@ public class KijelzoVege extends Kijelzo {
             kilepes.addMouseListener(new Listener());
         }else{
             Vector<VegeSzoveg> pontok = new Vector();
+            try{
             pontok.add(new VegeSzoveg(Main.nev,jatekter.jatekosOsszPont));
             pontok.add(new VegeSzoveg(jatekter.ellenfel1.nev.getText(),jatekter.ellenfel1.osszPontErtek));
             pontok.add(new VegeSzoveg(jatekter.ellenfel2.nev.getText(),jatekter.ellenfel2.osszPontErtek));
             pontok.add(new VegeSzoveg(jatekter.ellenfel3.nev.getText(),jatekter.ellenfel3.osszPontErtek));
-            
+            }catch(Exception e){}
             Collections.sort(pontok);
             
+            try{
             elso = new JLabel("1. hely : "+pontok.get(0).nev+"  ..........  "+pontok.get(0).pont+" pont",JLabel.CENTER);
             masodik = new JLabel("2. hely : "+pontok.get(1).nev+"  ..........  "+pontok.get(1).pont+" pont",JLabel.CENTER);
             harmadik = new JLabel("3. hely : "+pontok.get(2).nev+"  ..........  "+pontok.get(2).pont+" pont",JLabel.CENTER);
             negyedik = new JLabel("4. hely : "+pontok.get(3).nev+"  ..........  "+pontok.get(3).pont+" pont",JLabel.CENTER);
+            }catch(Exception e){}
             
+            try{
             elso.setFont(new Font(elso.getFont().getName(),elso.getFont().getStyle(),30));
             masodik.setFont(new Font(masodik.getFont().getName(),masodik.getFont().getStyle(),25));
             harmadik.setFont(new Font(harmadik.getFont().getName(),harmadik.getFont().getStyle(),20));
             negyedik.setFont(new Font(negyedik.getFont().getName(),negyedik.getFont().getStyle(),20));
+            }catch(Exception e){}
             
+            try{
             elso.setForeground(new Color(225,175,50));
             masodik.setForeground(new Color(200,200,200));
             harmadik.setForeground(new Color(200,100,20));
             negyedik.setForeground(new Color(nr,ng,nb));
+            }catch(Exception e){}
             
+            try{
             p.add(elso);
             p.add(masodik);
             p.add(harmadik);
             p.add(negyedik);
+            }catch(Exception e){}
             
+            try{
             elso.setSize(FOABLAK_SZEL/2, FOABLAK_MAG/9);
             masodik.setSize(FOABLAK_SZEL/2, FOABLAK_MAG/10);
             harmadik.setSize(FOABLAK_SZEL/2, FOABLAK_MAG/11);
             negyedik.setSize(FOABLAK_SZEL/2, FOABLAK_MAG/12);
+            }catch(Exception e){}
             
+            try{
             elso.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*1);
             masodik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*2);
             harmadik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*3);
             negyedik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*4);
+            }catch(Exception e){}
+            
+            jatekter.frame.dispose();
+            jatekter = null;
             
             kilepes = new Gomb("Vissza",getSzel()/2,getMag()/10);
             kilepes.setLocation(getSzel()/2-kilepes.getWidth()/2, getMag()/10*8);

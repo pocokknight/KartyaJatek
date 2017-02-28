@@ -192,6 +192,7 @@ class ServerClientKezelo {
                 if(t[1].equals(Main.nev)){
                     jatekter.nagyszovegkiir("Te vitted.");
                     jatekter.jatekosKorPont++;
+                    jatekter.labelfrissit();
                 }else{
                     jatekter.nagyszovegkiir(t[1]+" vitte.");
                     try{
@@ -234,10 +235,16 @@ class ServerClientKezelo {
                     }
                     }catch(Exception e){}
                 }
+                jatekter.kartyakFrissit();
+                jatekter.labelfrissit();
                 break;
             case "jatekvege":
                 vege = new KijelzoVege("A játék véget ért!", FOABLAK_SZEL, FOABLAK_MAG, true, false);
                 vege.setVisible(true);
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                }
                 jatekter.frame.dispose();
                 jatekter = null;
                 sck.leallitas();
