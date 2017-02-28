@@ -181,6 +181,15 @@ public class KijelzoJatekter extends Kijelzo {
         kiiras.setVisible(true);
     }
 
+    class Kilepesidozito implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            kilepesidozito.stop();
+        }
+        
+    }
+
      class SzovegTimer implements ActionListener {
 
         @Override
@@ -191,16 +200,25 @@ public class KijelzoJatekter extends Kijelzo {
 
     }
     
+    Timer kilepesidozito;
+     
     public class Listener implements MouseListener{
 
         @Override public void mouseClicked(MouseEvent me) {
             if(me.getSource() == kilepes){
-                if (iranyito != null) {
+                if (iranyito != null && sck == null) {
                     iranyito.leallit = !iranyito.leallit;
                     kilepes.label.setText("Kilepes : " + (iranyito.leallit ? "igen" : "nem"));
-                }
-                if (gyakorlo != null) {
+                }else if (gyakorlo != null) {
                     kilepes.label.setText("Kilepes : nem");
+                }else if (sck != null){
+                    if(kilepesidozito.isRunning()){
+                        jatekter.nagyszovegkiir("Most változott az érték csak 5 mp -enként lehet váltni.");
+                    }else{
+                        sck.leallit = !sck.leallit;
+                        kilepes.label.setText("Kilepes : " + (sck.leallit ? "igen" : "nem"));
+                        sck.leakarallitani();
+                    }
                 }
             }
         }
