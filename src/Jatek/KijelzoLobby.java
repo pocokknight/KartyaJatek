@@ -101,6 +101,7 @@ public class KijelzoLobby extends Kijelzo {
                 valaszto.setVisible(true);
             }else if(me.getSource() == server){
                 if(!vanserver){
+                    client.setVisible(false);
                     sck = new ServerClientKezelo();
                     bekero = new KijelzoSCBekero("Kérlek add meg a szerver portját:", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, true);
                 }else{
@@ -113,6 +114,8 @@ public class KijelzoLobby extends Kijelzo {
                 }
             }else if(me.getSource() == client){
                 System.out.println("client");
+                client.setVisible(false);
+                server.setVisible(false);
                 sck = new ServerClientKezelo();
                 bekero = new KijelzoSCBekero("Kérlek add meg a szerver IP címét és portját : -al elválasztva", FOABLAK_SZEL/2, FOABLAK_MAG/4, false, false);
             }

@@ -109,8 +109,10 @@ public class KijelzoVege extends Kijelzo {
             negyedik.setLocation(FOABLAK_SZEL/4, FOABLAK_MAG/10*4);
             }catch(Exception e){}
             
-            jatekter.frame.dispose();
-            jatekter = null;
+            if(jatekter != null){
+                jatekter.frame.dispose();
+                jatekter = null;
+            }
             
             kilepes = new Gomb("Vissza",getSzel()/2,getMag()/10);
             kilepes.setLocation(getSzel()/2-kilepes.getWidth()/2, getMag()/10*8);

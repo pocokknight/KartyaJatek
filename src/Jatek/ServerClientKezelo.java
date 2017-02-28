@@ -121,7 +121,8 @@ class ServerClientKezelo {
                 Main.nev = t[1];
                 break;
             case "uzenet":
-                lobby.chat.setText(lobby.chat.getText()+"\n"+t[1]);
+                if(lobby != null)lobby.chat.setText(lobby.chat.getText()+"\n"+s);
+                if(jatekter != null)jatekter.chat.setText(jatekter.chat.getText()+"\n"+s);
                 break;
             case "kezdes":
                 jatekter = new KijelzoJatekter("Riki-tiki by: Pocok", FOABLAK_SZEL, FOABLAK_MAG, false);
@@ -269,7 +270,8 @@ class ServerClientKezelo {
         for (int i = 0; i < S.alserverek.size(); i++) {
             S.alserverek.get(i).kuld("uzenet@"+s);
         }
-        lobby.chat.setText(lobby.chat.getText()+"\n"+s);
+        if(lobby != null)lobby.chat.setText(lobby.chat.getText()+"\n"+s);
+        if(jatekter != null)jatekter.chat.setText(jatekter.chat.getText()+"\n"+s);
     }
     
     void uzenet(String s) {

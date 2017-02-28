@@ -19,6 +19,10 @@ public class KijelzoJatekter extends Kijelzo {
     Listener listener = new Listener();
     JLabel jatekospont,jatekostipp,kiiras,sajatutes;
     
+    JScrollPane chatscroll;
+    JTextField chatbe;
+    JTextArea chat;
+    
     public KijelzoJatekter(String cim, int w, int h,boolean egyjatekos) {
         super(cim, w, h, true);
         this.egyjatekos = egyjatekos;
@@ -116,6 +120,26 @@ public class KijelzoJatekter extends Kijelzo {
             p.add(ellenfel3);
         }
         
+        chat = new JTextArea();
+        chatscroll = new JScrollPane(chat);
+        chatscroll.setSize(FOABLAK_SZEL/8, FOABLAK_MAG/20*13);
+        chatscroll.setLocation(FOABLAK_SZEL/20*17, FOABLAK_MAG/10*1);
+        chat.setLineWrap(true);
+        chat.setWrapStyleWord(true);
+        chat.setEditable(false);
+        chat.setFocusable(false);
+        chat.setBackground(new Color(0,0,0,0));
+        chat.setForeground(new Color(nr,ng,nb));
+        p.add(chatscroll);
+        
+        chatbe = new JTextField();
+        chatbe.setSize(FOABLAK_SZEL/8, FOABLAK_MAG/20);
+        chatbe.setLocation(FOABLAK_SZEL/20*17, FOABLAK_MAG/20*15);
+        chat.setBackground(new Color(0,0,0,0));
+        chatbe.setForeground(new Color(nr,ng,nb));
+        chatbe.addKeyListener(new KeyL());
+        p.add(chatbe);
+        
         kartyakFrissit();
     }
     
@@ -179,6 +203,20 @@ public class KijelzoJatekter extends Kijelzo {
         szovegtimer.start();
         kiiras.setText(s);
         kiiras.setVisible(true);
+    }
+
+    class KeyL implements KeyListener {
+        
+        @Override public void keyTyped(KeyEvent ke) {
+            if(ke.getKeyChar() == '\n'){
+                try{
+                sck.uzenet(chatbe.getText());
+                chatbe.setText("");
+                }catch(Exception e){}
+            }
+        }
+        @Override public void keyPressed(KeyEvent ke) {}
+        @Override public void keyReleased(KeyEvent ke) {}
     }
 
     class Kilepesidozito implements ActionListener {
