@@ -376,7 +376,7 @@ public class JatekIranyito {
         jatekter.ellenfel3.korPontErtek = 0;
         
         }catch(Exception e){}
-        sck.mindenfrissit();
+        if(sck != null)sck.mindenfrissit();
         jatekter.labelfrissit();
     }
 
