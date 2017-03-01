@@ -107,6 +107,23 @@ class ServerClientKezelo {
         System.out.println("client kapott uzenet "+s);
         String[] t = s.split("@");
         switch(t[0]){
+            case "televagyunk":
+                new KijelzoHiba("Nem sikerült csatlakozni a szerver tele van.", FOABLAK_SZEL/2, FOABLAK_MAG/4);
+                lobby.frame.dispose();
+                lobby = null;
+                if(tbk != null){
+                    tbk.frame.dispose();
+                    tbk = null;
+                }
+                if(jatekter != null){
+                    jatekter.frame.dispose();
+                    jatekter = null;
+                }
+                sck.leallitas();
+                sck = null;
+                Main.valaszto = new KijelzoValaszto("Riki - Tiki készítette: Horváth Patrik", FOABLAK_SZEL, FOABLAK_MAG, true);
+                Main.valaszto.setVisible(true);
+                break;
             case "lobbynevek":
                 if(lobby != null){
                     lobby.nevek.clear();

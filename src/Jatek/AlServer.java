@@ -45,23 +45,27 @@ public class AlServer extends Thread implements Comparable{
             try{
                 String uz = in.readUTF();
                 if(uz.startsWith("kapcs")){
-                    String[] t = uz.split("@");
-                    servernev = t[1];
-                    if(servernev.equals(Main.nev)){
-                        servernev += "("+nevszamlalo+")";
-                        nevszamlalo++;
-                    }
-                    for (int i = 0; i < lobby.nevek.size(); i++) {
-                        if(servernev.equals(lobby.nevek.get(i))){
+                    if(sck.S.alserverek.size()>3){
+                        kuld("televagyunk");
+                    }else{
+                        String[] t = uz.split("@");
+                        servernev = t[1];
+                        if(servernev.equals(Main.nev)){
                             servernev += "("+nevszamlalo+")";
                             nevszamlalo++;
                         }
+                        for (int i = 0; i < lobby.nevek.size(); i++) {
+                            if(servernev.equals(lobby.nevek.get(i))){
+                                servernev += "("+nevszamlalo+")";
+                                nevszamlalo++;
+                            }
+                        }
+                        lobby.nevek.add(new StringBoolean(servernev,false));
+                        kuld("ujnev@"+servernev);
+                        lobby.nevekfrissit();
+                        sck.nevekfrissit();
                     }
-                    lobby.nevek.add(new StringBoolean(servernev,false));
-                    kuld("ujnev@"+servernev);
-                    lobby.nevekfrissit();
-                    sck.nevekfrissit();
-                }else{
+                }else if(sck.S.alserverek.size()<=3){
                     sck.ServernekUzenet(uz);
                 }
             }catch(Exception e){
