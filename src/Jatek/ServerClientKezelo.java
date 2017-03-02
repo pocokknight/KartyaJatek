@@ -56,7 +56,6 @@ class ServerClientKezelo {
     }
 
     void ServernekUzenet(String s){
-        System.out.println("server kapott üzenet "+s);
         String[] t = s.split("@");
         switch(t[0]){
             case "uzenet":
@@ -104,7 +103,6 @@ class ServerClientKezelo {
     }
     
     void ClientnekUzenet(String s){
-        System.out.println("client kapott uzenet "+s);
         String[] t = s.split("@");
         switch(t[0]){
             case "televagyunk":
@@ -336,7 +334,6 @@ class ServerClientKezelo {
     int tippeksorszama = 0;
     
     void tippszamlalo(){
-        System.out.println(tippeksorszama);
         if(S != null){
             tippeksorszama++;
             if(tippeksorszama == iranyito.letszam){
