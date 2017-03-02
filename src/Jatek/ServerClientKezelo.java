@@ -379,9 +379,17 @@ class ServerClientKezelo {
         }
     }
 
-    void leakarallitani() {
+    void leakarallni() {
         if(C != null){
-            C.kuld("leallvalt");
+            C.kuld("kilepek");
+        }else{
+            uzenetMindenkinek("jatekvege");
+            vege = new KijelzoVege("A játék véget ért!", FOABLAK_SZEL, FOABLAK_MAG, true, false);
+            vege.setVisible(true);
+            jatekter.frame.dispose();
+            jatekter = null;
+            sck.leallitas();
+            sck = null;
         }
     }
     

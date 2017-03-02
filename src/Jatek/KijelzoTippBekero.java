@@ -17,6 +17,7 @@ public class KijelzoTippBekero extends Kijelzo {
     public KijelzoTippBekero(String cim, int w, int h, boolean kilepos, boolean e) {
         super(cim, w, h, kilepos);
         egyszemelyes = e;
+        frame.setAlwaysOnTop(true);
         ok = new Gomb("Rendben",getSzel()/2,getMag()/5);
         ok.setLocation(getSzel()/2-ok.getWidth()/2, getMag()/2);
         p.add(ok);

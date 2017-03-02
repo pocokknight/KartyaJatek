@@ -15,6 +15,7 @@ public class KijelzoSCBekero extends Kijelzo {
 
     public KijelzoSCBekero(String cim, int w, int h, boolean kilepos, boolean server) {
         super(cim, w, h, kilepos);
+        frame.setAlwaysOnTop(true);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.server = server;
         ok = new Gomb("Rendben", getSzel() / 2, getMag() / 5);

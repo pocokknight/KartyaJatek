@@ -27,7 +27,7 @@ public class KijelzoJatekter extends Kijelzo {
         super(cim, w, h, true);
         this.egyjatekos = egyjatekos;
         rakhat = false;
-        kilepes = new Gomb("Kilépés : nem",getSzel()/10,getMag()/20);
+        kilepes = new Gomb("Kilépés",getSzel()/10,getMag()/20);
         kilepes.setLocation(getSzel()/10*8, getMag()/10*9);
         p.add(kilepes);
         kilepes.addMouseListener(new Listener());
@@ -212,6 +212,7 @@ public class KijelzoJatekter extends Kijelzo {
                 try{
                 sck.uzenet(chatbe.getText());
                 chatbe.setText("");
+                p.repaint();
                 }catch(Exception e){}
             }
         }
@@ -253,9 +254,7 @@ public class KijelzoJatekter extends Kijelzo {
                     if(kilepesidozito.isRunning()){
                         jatekter.nagyszovegkiir("Most változott az érték csak 5 mp -enként lehet váltni.");
                     }else{
-                        sck.leallit = !sck.leallit;
-                        kilepes.label.setText("Kilepes : " + (sck.leallit ? "igen" : "nem"));
-                        sck.leakarallitani();
+                        sck.leakarallni();
                     }
                 }
             }
