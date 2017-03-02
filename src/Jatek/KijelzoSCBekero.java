@@ -62,7 +62,7 @@ public class KijelzoSCBekero extends Kijelzo {
                     try {
                         String[] t = mezo.getText().split(":");
                         if (!t[0].equals("localhost")) {
-                            String[] ip = t[0].split(".");
+                            String[] ip = t[0].split("\\.");
                             for (int i = 0; i < ip.length; i++) {
                                 int x = Integer.parseInt(ip[i]);
                             }
